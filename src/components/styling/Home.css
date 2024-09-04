@@ -8,6 +8,11 @@
     flex-direction: column;
 }
 
+.home h1
+{
+    color: rgba(0, 0, 0, .5);
+}
+
 .home-header
 {
     display: flex;

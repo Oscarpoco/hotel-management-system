@@ -1,0 +1,91 @@
+.accomodation-layout
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.accomodation-header
+{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+
+.accomodation-header h1
+{
+    color: rgba(0, 0, 0, .5);
+}
+
+.accomodation-header button
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 1.5em;
+    border-radius: 10px;
+    background: #1877F2;
+    border: 1px solid #1877F2;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+    font-weight: 700;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.accomodation-header button:hover
+{
+    border-radius: 10px;
+    background: #1DA1F2;
+    border: 1px solid #1DA1F2;
+    transition: all .5s ease-in-out;
+}
+
+.accomodation-grid
+{
+    width: 100%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 1em;
+    gap: 1em;
+    overflow-y: auto;
+}
+
+.accomodation-grid-item
+{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.room-picture
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.room-picture img
+{
+    width: 100%;
+}
+
+.accomodation-content
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+    width: 100%;
+}

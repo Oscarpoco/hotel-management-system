@@ -26,7 +26,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    /* gap: .5em; */
     padding: 1em;
     overflow-y: auto;
 }
@@ -60,7 +59,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: .3em;
+    /* padding: .3em; */
     gap: .3em;
 }
 

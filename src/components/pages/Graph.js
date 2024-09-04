@@ -8,11 +8,12 @@ const data = [
   { name: 'Apr', value: 27 },
   { name: 'May', value: 18 },
   { name: 'Jun', value: 23 },
+  { name: 'Jul', value: 23 },
   { name: 'Aug', value: 34 },
   { name: 'Sep', value: 34 },
   { name: 'Oct', value: 39 },
   { name: 'Nov', value: 46 },
-  { name: 'Dec', value: 190 },
+  { name: 'Dec', value: 140 },
 ];
 
 const SimpleBarChart = () => (

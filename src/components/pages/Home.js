@@ -10,7 +10,7 @@ export default function Home(){
 
             {/* HOME HEADER */}
             <div className="home-header">
-                <h1>Perfomance Line Graph</h1>
+                <h1>Perfomance Bar Graph</h1>
             </div>
             {/* ENDS */}
 
