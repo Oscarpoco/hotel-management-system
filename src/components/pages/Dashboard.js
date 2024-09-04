@@ -3,7 +3,7 @@ import '../styling/Dashboard.css';
 import { useSelector, useDispatch } from "react-redux";
 
 // actions
-import { handleSideBar } from "../../redux/actions/UserInterface";
+import { handleSideBar, onProfileOpen, handleLoader } from "../../redux/actions/UserInterface";
 import { setView } from "../../redux/actions/View";
 
 // ICONS
@@ -17,6 +17,7 @@ import { GrGallery } from "react-icons/gr";
 import { PiWarehouseFill } from "react-icons/pi";
 import { RiShieldUserFill } from "react-icons/ri";
 import { IoNotificationsSharp } from "react-icons/io5";
+import { MdOutlineFavorite } from "react-icons/md";
 
 // COMPONENTS
 import SwitchBetweenComponents from "./SwitchingComponents";
@@ -31,14 +32,38 @@ function Dashboard(){
     // HANDLE OPENING SIDEBAR
 
     const HandleToggleSideBar = ()=>{
-        dispatch(handleSideBar());
+        
+        dispatch(handleLoader(true));
+
+        setTimeout (()=> {
+            dispatch(handleSideBar());
+            dispatch(handleLoader(false));
+        }, 3000);
     }
 
     // HANDLE SIDEBAR NAVIGATION CLICKS
     const handleChangeView = (view)=>{
-        dispatch(setView(view));
+       
+        dispatch(handleLoader(true));
+
+        setTimeout (()=> {
+            dispatch(setView(view));
+            dispatch(handleLoader(false));
+        }, 3000);
     }
     // ENDS
+
+    // HANLDE OPENING PROFILE
+    const HnadleOpenProfile = ()=>{
+        
+        dispatch(handleLoader(true));
+
+        setTimeout (()=> {
+            dispatch(onProfileOpen());
+            dispatch(handleLoader(false));
+        }, 3000);
+    }
+
 
 
     return(
@@ -67,6 +92,7 @@ function Dashboard(){
                             <button  className="navigation-buttons" onClick={() =>handleChangeView('users')}><RiShieldUserFill className="sidebar-icons" style={{color: '#1DA1F2'}} />Users</button>
                             <button  className="navigation-buttons" onClick={() =>handleChangeView('accomodation')}><PiWarehouseFill className="sidebar-icons" style={{color: '#1877F2'}} />Accomodation</button>
                             <button  className="navigation-buttons" onClick={() =>handleChangeView('notifications')}><IoNotificationsSharp className="sidebar-icons" style={{color: '#772222'}} />Notifications</button>
+                            <button  className="navigation-buttons" onClick={() =>handleChangeView('favorite')}><MdOutlineFavorite className="sidebar-icons" style={{color: '#772222'}} />Favorites</button>
                         </div>
 
                         {/* ENDS */}
@@ -99,7 +125,7 @@ function Dashboard(){
 
                         {/* ADMIN PROFILE */}
                         <div className="user-profile">
-                            <div className="profile">
+                            <div className="profile" onClick={HnadleOpenProfile}>
                                 <img src="boy.jpg" alt="profile-picture"></img>
                             </div>
                             <div className="logout">

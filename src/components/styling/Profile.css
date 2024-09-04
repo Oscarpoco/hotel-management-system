@@ -1,0 +1,147 @@
+
+.on-profile-layout
+{
+    height: 95%;
+    width: 25%;
+    background: white;
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    border: 1px solid rgba(0, 0, 0, .1);
+    box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+}
+
+.on-profile-content
+{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1em 0;
+    gap: .7em;
+    background: rgba(0, 0, 0, .8); 
+}
+
+.profile-header
+{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    background: rgba(0, 0, 0, .5);
+}
+
+.profile-header h3
+{
+    color: whitesmoke;
+    width: 40%;
+}
+
+.profile-header .back-arrow
+{
+    color: whitesmoke;
+    font-size: 1.3em;
+    width: 10%;
+}
+
+.profile-header .back-arrow:hover
+{
+    color: rgb(138, 27, 27);
+    transition: all .5s ease-in-out;
+}
+
+.edit-profile-wrapper
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+}
+
+.edit-icon
+{
+    font-size: 1.3em;
+    color: #25D366;
+    cursor: pointer;
+}
+
+.edit-icon:hover
+{
+    color: #1DA1F2;
+    transition: all .5s ease-in-out;
+}
+
+/* PROFILE PICTURE */
+.user-profile-picture
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .5);
+}
+
+.user-profile-picture img
+{
+    width: 100%;
+    border-radius: 50%;
+}
+
+/* PROFILE DETAILS */
+.profile-details
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    gap: .5em;
+    background: rgba(0, 0, 0, .5);
+    padding-top: .7em;
+}
+
+.user-details-wrapper
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    gap: .3em;
+}
+
+.user-details-wrapper p
+{
+    width: 100%;
+    padding: .5em 1em;
+    background: #1DA1F2;
+    color: whitesmoke;
+}
+
+.user-details-wrapper input
+{
+    width: 100%;
+    padding: .5em 1em;
+    background: whitesmoke;
+    color: rgba(0, 0, 0, .5);
+    outline: none;
+}
+
+.user-details-wrapper label
+{
+    width: 100%;
+    padding: 0 1em;
+    padding-top: 1em;
+    color: whitesmoke;
+}
+
+.on-profile-content form label
+{
+    padding-left: 0;
+}

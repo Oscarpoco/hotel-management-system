@@ -1,5 +1,7 @@
 import React from "react";
 import '../styling/Notifications.css';
+import { handleOpenNotifButton, handleLoader } from "../../redux/actions/UserInterface";
+import { useSelector, useDispatch } from "react-redux";
 
 // ICONS
 import { IoIosArrowBack } from "react-icons/io";
@@ -7,12 +9,27 @@ import { IoMdSend } from "react-icons/io";
 
 export default function Notifications(){
 
+    const dispatch = useDispatch();
+    const sendNotificationButton = useSelector((state) => state.userInterface.sendNotificationButton);
+
+    // HANDLE OPEN FORM
+    const handleOpenForm = () => {
+        
+        dispatch(handleLoader(true));
+
+        setTimeout (()=> {
+            dispatch(handleOpenNotifButton());
+            dispatch(handleLoader(false));
+        }, 3000);
+        }
+    // HANDLE CLOSE FORM
+
     return(
         <div className="notifications-layout">
             {/* NOTIFICATIONS HEADER */}
             <div className="notifications-header">
                 <h1>Notifications</h1>
-                <button className="add-picture">Send Message</button>
+                <button className="open-form" onClick={handleOpenForm}>Send Message</button>
             </div>
             {/* ENDS */}
 
@@ -23,10 +40,11 @@ export default function Notifications(){
             {/* ENDS */}
 
             {/* MESSAGE FORM */}
+            {sendNotificationButton && (
             <div className="send-message">
                 {/* SEND MESSAGE HEADER */}
                 <div className="send-message-header">
-                    <IoIosArrowBack className="back-arrow"/>
+                    <IoIosArrowBack className="back-arrow" onClick={handleOpenForm}/>
                     <h2>Compose</h2>
 
                     <button className="send-button">
@@ -61,7 +79,9 @@ export default function Notifications(){
                 </div>
                 {/*ENDS  */}
             </div>
+            )}
             {/* ENDS */}
+            
         </div>
     )
 }

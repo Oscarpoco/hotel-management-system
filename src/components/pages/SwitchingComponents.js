@@ -9,6 +9,7 @@ import Accomodation from './Accomodation';
 import Notifications from './Notifications';
 import Reviews from './Reviews';
 import Users from './Users';
+import Favorite from "./Favorite";
 
 function SwitchBetweenComponents(){
     const currentView = useSelector((state) => state.view.currentView);
@@ -38,6 +39,9 @@ function SwitchBetweenComponents(){
 
             case 'users':
                 return <Users />
+
+            case 'favorite':
+                return <Favorite />
 
             default:
                 return <Home />
