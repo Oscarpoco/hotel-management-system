@@ -1,0 +1,112 @@
+.user-layout
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.user-header
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    padding: 1em;
+}
+
+.overall-users
+{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* gap: .5em; */
+    padding: 1em;
+    overflow-y: auto;
+}
+
+.user-header-wrapper
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: .2em;
+    gap: .2em;
+    background: #1DA1F2;
+}
+
+.user-header-wrapper p
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: .7em;
+    background: rgba(255, 255, 255, 0.5);
+    font-weight: 1000;
+    font-family: 'Helvetica Neue ';
+}
+
+.user-wrapper
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: .3em;
+    gap: .3em;
+}
+
+.user-wrapper p
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: .7em;
+    background: #1DA1F2;
+    color: whitesmoke;
+}
+
+.user-wrapper .remove-button
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: .7em;
+}
+
+.user-header h1
+{
+    color: rgba(0, 0, 0, .5);
+}
+.user-wrapper button
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.1em;
+    border-radius: 10px;
+    background: #1877F2;
+    border: 2px solid #1877F2;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+    font-weight: 700;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.user-wrapper button:hover
+{
+    border-radius: 10px;
+    background: #1DA1F2;
+    border: 2px solid #1DA1F2;
+    transition: all .5s ease-in-out;
+}

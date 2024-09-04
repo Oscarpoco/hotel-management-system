@@ -1,0 +1,161 @@
+.signIn-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.signIn-wrapper span
+{
+    color: white;
+    font-size: 1em;
+}
+
+.signIn-wrapper h2
+.signIn-wrapper h3
+{
+    color: black;
+}
+
+/* LOGO WRAPPER BAR */
+.logo-bar
+{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    gap: .7em;
+    background: rgba(0, 0, 0, .2);
+    padding: 0 1em;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+}
+
+.logo-bar .logo-abbreviation
+{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+}
+
+.form-header-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 85%;
+    background: rgba(0, 0, 0, .5);
+}
+
+
+/* FORM WRAPPER */
+.form-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    border-radius: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    padding: 2em 0;
+    background: rgba(0, 0, 0, .1);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
+    box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+}
+
+.form-header 
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-header h2
+{
+    color: rgba(0, 0, 0, .5);
+}
+
+/* FORM */
+form
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .7em;
+    padding: 1em;
+}
+
+.input-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    padding: .3em;
+    gap: .5em;
+}
+
+.input-wrapper input
+{
+    width: 100%;
+    background: rgba(0, 0, 0, .1);
+    padding: .7em;
+    outline: none;
+    border: none;
+    color: white;
+    border-bottom: 3px solid black;
+}
+
+.input-wrapper label
+{
+    width: 100%;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input-wrapper input:focus
+{
+    background: rgba(0, 0, 0, .7);
+    border: none;
+    border-bottom: 3px solid whitesmoke;
+    transition: all .7s ease;
+}
+
+form button
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 2px solid rgba(0, 0, 0, 0.214);
+    padding: 1em 1.5em;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    background: rgba(0, 0, 0, .1);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form button:hover
+{
+    border-radius: 15px;
+    border: 2px solid rgba(0, 0, 0, 0.214);
+    background: rgba(0, 0, 0, .5);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
+    transition: all .5s ease;
+}
