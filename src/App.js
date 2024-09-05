@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
         <main>
-          {!isSignedIn ? <Dashboard />: <SignIn />}
+          {isSignedIn ? <Dashboard />: <SignIn />}
         </main>
         
         {/* POPUPs */}

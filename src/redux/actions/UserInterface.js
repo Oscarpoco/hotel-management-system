@@ -24,7 +24,7 @@ export const IS_LOADER_OPEN = 'IS_LOADER_OPEN';
 
 // ACTIONS CREATOR
 
-export const isSignedInTriggered = ()=>{
+export const toggleSigning = ()=>{
     return{
         type: IS_SIGNED_IN,
     }

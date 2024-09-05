@@ -1,7 +1,7 @@
 import React from "react";
 import '../styling/Profile.css';
 import { useSelector, useDispatch } from "react-redux";
-import { onProfileOpen, handleOnUpdate } from "../../redux/actions/UserInterface";
+import { onProfileOpen, handleOnUpdate, handleLoader } from "../../redux/actions/UserInterface";
 
 // ICONS
 import { IoIosArrowBack } from "react-icons/io";
@@ -15,12 +15,24 @@ export default function Profile(){
 
     // HANDLE CLOSE PROFILE
     const handleCloseProfile = () =>{
-        dispatch(onProfileOpen())
+        
+        dispatch(handleLoader(true));
+
+        setTimeout (()=> {
+            dispatch(onProfileOpen());
+            dispatch(handleLoader(false));
+        }, 3000);
     }
 
     // HANDLE ON UPDATE
     const onUpdating = ()=>{
-        dispatch(handleOnUpdate())
+        
+        dispatch(handleLoader(true));
+
+        setTimeout (()=> {
+            dispatch(handleOnUpdate());
+            dispatch(handleLoader(false));
+        }, 3000);
     }
 
     return(

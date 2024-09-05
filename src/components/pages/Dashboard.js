@@ -19,6 +19,8 @@ import { RiShieldUserFill } from "react-icons/ri";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { MdOutlineFavorite } from "react-icons/md";
 
+import { toggleSigning } from '../../redux/actions/UserInterface';
+
 // COMPONENTS
 import SwitchBetweenComponents from "./SwitchingComponents";
 
@@ -28,6 +30,17 @@ function Dashboard(){
 
     const isSideBarOpen = useSelector((state)=> state.userInterface.isSideBarOpen);
     const dispatch = useDispatch();
+
+    // LOGOUT
+    const handleLogout = () => {
+        dispatch(handleLoader(true));
+
+        setTimeout (()=> {
+            dispatch(toggleSigning());
+            dispatch(handleLoader(false));
+        }, 3000);
+        
+    }
 
     // HANDLE OPENING SIDEBAR
 
@@ -129,7 +142,7 @@ function Dashboard(){
                                 <img src="boy.jpg" alt="profile-picture"></img>
                             </div>
                             <div className="logout">
-                                <RiLogoutCircleRLine className="logout-icon"/>
+                                <RiLogoutCircleRLine className="logout-icon" onClick={handleLogout}/>
                             </div>
                         </div>
                    </nav>
