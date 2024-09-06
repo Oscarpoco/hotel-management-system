@@ -59,7 +59,7 @@
     width: 100%;
     height: 90%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     padding: 1em;
     gap: 1em;
     overflow-y: auto;
@@ -72,7 +72,7 @@
     align-items: flex-start;
     flex-direction: column;
     gap: .7em;
-    height: 200px;
+    height: 400px;
     overflow: hidden;
     box-sizing: border-box;
     cursor: pointer;

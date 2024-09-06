@@ -134,6 +134,7 @@
     align-items: flex-start;
     gap: 1em;
     padding: .5em;
+    z-index: 1000;
 }
 
 .accomodations-form .input-wrapper
