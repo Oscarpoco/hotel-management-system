@@ -77,13 +77,19 @@
 // export default SignIn;
 
 import React, { useState } from "react";
-import '../styling/SignIn.css';
-import { useDispatch } from "react-redux";
-import { toggleSigning, handleLoader } from '../../redux/actions/UserInterface';
+import "../styling/SignIn.css";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleSigning, handleLoader } from "../../redux/actions/UserInterface";
+import { handleCloseNotificationAlert, handleOpenNotificationAlert } from "../../redux/actions/AlertNotification";
+import { auth } from "../../firebase/Firebase"; // Import Firebase Auth
+import { signInWithEmailAndPassword } from "firebase/auth"; // Import Firebase sign-in method
+import NotificationArlet from "./NotificationArlet";
 
 function SignIn() {
     const dispatch = useDispatch();
-    const [username, setUsername] = useState("");
+    const notification = useSelector((state) => state.notification);
+
+    const [email, setEmail] = useState(""); // Changed to email
     const [password, setPassword] = useState("");
 
     // HANDLE SUBMIT
@@ -91,28 +97,28 @@ function SignIn() {
         e.preventDefault();
         dispatch(handleLoader(true));
 
-        
-        const adminUsername = "admin";
-        const adminPassword = "password123";
+        // Use Firebase Authentication to sign in the user
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in successfully
+              
+                dispatch(handleOpenNotificationAlert('Login successful!'));
+                setTimeout(() => dispatch(handleCloseNotificationAlert()), 3000);
 
-        setTimeout (()=> {
-        // Check if the input matches the dummy credentials
-        if (username === adminUsername && password === adminPassword) {
-            alert("Login successful!");
-            dispatch(toggleSigning());
-            // Perform additional actions on successful login, if needed
-        } else {
-            alert("Invalid username or password!");
-        }
-        dispatch(handleLoader(false));
-        }, 3000);
+                dispatch(toggleSigning());
+                dispatch(handleLoader(false));
+            })
+            .catch((error) => {
+                // Handle Errors here
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                dispatch(handleOpenNotificationAlert(`${errorMessage}`));
+                setTimeout(() => dispatch(handleCloseNotificationAlert()), 3000);
+
+                dispatch(handleLoader(false));
+            });
     };
-
-    
-
-        
-            dispatch(toggleSigning());
-            
 
     return (
         <div className="signIn-wrapper">
@@ -132,14 +138,14 @@ function SignIn() {
                         <h2>Sign In</h2>
                     </div>
                     <form onSubmit={handleSubmit}>
-                        {/* USERNAME */}
+                        {/* EMAIL */}
                         <div className="input-wrapper">
-                            <label className="username-label">Username</label>
+                            <label className="username-label">Email</label>
                             <input 
-                                type="text" 
-                                placeholder="Enter Username" 
-                                value={username} 
-                                onChange={e => setUsername(e.target.value)} 
+                                type="email" 
+                                placeholder="Enter Email" 
+                                value={email} 
+                                onChange={e => setEmail(e.target.value)} 
                             />
                         </div>
 
@@ -159,6 +165,13 @@ function SignIn() {
                     </form>
                 </div>
             </div>
+
+            {/* POPUP */}
+            <NotificationArlet 
+            message={notification.message} 
+            onClose={() => dispatch(handleCloseNotificationAlert())} 
+            notificationArletVisible={notification.notificationArletVisible}
+            />
         </div>
     );
 }

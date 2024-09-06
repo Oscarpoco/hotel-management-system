@@ -22,6 +22,8 @@ export const IS_LOADER_OPEN = 'IS_LOADER_OPEN';
 
 
 
+
+
 // ACTIONS CREATOR
 
 export const toggleSigning = ()=>{
@@ -72,3 +74,4 @@ export const handleLoader = ()=>{
         type: IS_LOADER_OPEN,
         }
     }
+

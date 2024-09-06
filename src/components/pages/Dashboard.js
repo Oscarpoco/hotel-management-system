@@ -45,13 +45,7 @@ function Dashboard(){
     // HANDLE OPENING SIDEBAR
 
     const HandleToggleSideBar = ()=>{
-        
-        dispatch(handleLoader(true));
-
-        setTimeout (()=> {
-            dispatch(handleSideBar());
-            dispatch(handleLoader(false));
-        }, 3000);
+        dispatch(handleSideBar());
     }
 
     // HANDLE SIDEBAR NAVIGATION CLICKS

@@ -1,4 +1,13 @@
-import { IS_SIGNED_IN, IS_SIDE_BAR_OPEN, IS_SEND_NOTIF_BUTTON_OPEN, IS_PROFILE_OPEN, ON_UPDATE_PROFILE, ON_ADD_ACCOMODATION, IS_LOADER_OPEN } from '../actions/UserInterface';
+import { IS_SIGNED_IN, 
+    IS_SIDE_BAR_OPEN, 
+    IS_SEND_NOTIF_BUTTON_OPEN, 
+    IS_PROFILE_OPEN, 
+    ON_UPDATE_PROFILE, 
+    ON_ADD_ACCOMODATION, 
+    IS_LOADER_OPEN, 
+    
+} 
+from '../actions/UserInterface';
 
 const initialState = {
     isSignedIn: false,
@@ -8,6 +17,7 @@ const initialState = {
     updatingProfile: false,
     addingAccomodation: false,
     isLoading: false,
+    
 };
 
 const UserInterfaceReducer = (state = initialState, action) => {
@@ -66,6 +76,7 @@ const UserInterfaceReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: !state.isLoading
             }
+
         
         default:
             return state;
