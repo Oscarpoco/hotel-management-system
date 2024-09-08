@@ -46,7 +46,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
+    width: 16.66%;
     padding: .7em;
     background: rgba(255, 255, 255, 0.5);
     font-weight: 1000;
@@ -59,7 +59,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    /* padding: .3em; */
+    padding: .2em;
     gap: .3em;
 }
 
@@ -68,7 +68,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
+    width: 16.66%;
     padding: .7em;
     background: #1DA1F2;
     color: whitesmoke;
@@ -79,7 +79,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
+    width: 16.66%;
     padding: .7em;
 }
 

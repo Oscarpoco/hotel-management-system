@@ -1,102 +1,4 @@
-// import React from "react";
-// import '../styling/Accomodation.css';
-// import { useSelector, useDispatch } from "react-redux";
-// import { handleAddingAccomodation, handleLoader } from "../../redux/actions/UserInterface";
 
-// // ICONS
-// import { IoMdClose } from "react-icons/io";
-
-// export default function Accomodation(){
-
-//     const dispatch = useDispatch();
-//     const addingAccomodation = useSelector((state) => state.userInterface.addingAccomodation);
-
-//     // Handle OPEN AND CLOSE FORM
-//     const handleOpenAccomdationForm = ()=>{
-//         dispatch(handleLoader(true));
-
-//         setTimeout (()=> {
-//             dispatch(handleAddingAccomodation(true));
-//             dispatch(handleLoader(false));
-//         }, 3000);
-//     }
-//     // ENDS
-
-//     // HANDLE CLOSE
-//     const handleClose = ()=>{
-//         dispatch(handleAddingAccomodation(false));
-//         }
-//     // ENDS
-
-//     return(
-//         <div className="accomodation-layout">
-//             {/* ACCOMODATION HEADER */}
-//             <div className="accomodation-header">
-//                 <h1>Accomodation</h1>
-//                 <button className="add-accomodation" onClick={handleOpenAccomdationForm}>Add Picture</button>
-//             </div>
-//             {/* ENDS */}
-
-//             {/* ACCOMODATION GRID */}
-//             <div className="accomodation-grid">
-
-//                 {/* ACCOMODATION */}
-//                 <div className="accomodation-grid-item">
-
-//                     {/* PICTURE */}
-//                     <div className="room-picture">
-//                         <img src="rooms.jpeg" alt="pictures"/>
-//                     </div>
-
-//                     {/* CONTENT */}
-//                     <div className="accomodation-content">
-//                         <p>Available: Sep 1-7</p>
-//                         <p><strong>1500 ZAR</strong> night</p>
-//                     </div>
-//                 </div>
-//                 {/* ENDS */}
-
-//             </div>
-//             {/* ENDS */}
-
-//             {/* POOPUP */}
-//             {addingAccomodation && (
-//                 <form className="accomodations-form">
-
-//                     {/* LEFT INPUTS */}
-//                     <div className="input-wrapper">
-//                         <input type="file" accept="image"></input>
-//                         <input type="file" accept="image"></input>
-//                         <input type="file" accept="image"></input>
-//                         <input type="text" placeholder="Price"></input>
-//                         <input type="text" placeholder="Availability"></input>
-//                         <input type="text" placeholder="Location"></input>
-//                         <input type="text" placeholder="Number of rooms"></input>
-//                         <input type="text" placeholder="First Amenities"></input>
-//                         <input type="text" placeholder="Second Amenities"></input>
-//                     </div>
-
-//                     {/* RIGHT INPUTS */}
-//                     <div className="input-wrapper">
-//                         <input type="text" placeholder="Third Amenities"></input>
-//                         <input type="text" placeholder="Fourth Amenities"></input>
-//                         <input type="text" placeholder="Fifth Amenities"></input>
-//                         <input type="text" placeholder="Sixth Amenities"></input>
-//                         <input type="text" placeholder="Seventh Amenities"></input>
-//                         <textarea placeholder="Room description and policies"></textarea>
-//                     </div>
-
-//                     {/* BUTTONS */}
-//                     <div className="action-buttons-wrapper">
-//                         <button className="close-form-button" onClick={handleClose}><IoMdClose className="close-detail-form"/></button>
-//                         <button type="submit" className="send-details-button">Submit</button>
-//                     </div>
-                    
-//                 </form>
-//             )}
-//         </div>
-//     )
-// }
 
 import React, { useState, useEffect } from "react";
 import '../styling/Accomodation.css';
@@ -121,6 +23,7 @@ export default function Accomodation() {
         numberOfRooms: "",
         amenities: [],
         description: "",
+        title: "",
     });
 
     const [accommodations, setAccommodations] = useState([]);
@@ -128,7 +31,7 @@ export default function Accomodation() {
     const db = getFirestore();
 
     useEffect(() => {
-        fetchAccommodations(); // Fetch accommodations when component mounts
+        fetchAccommodations();
     }, []);
 
     // Fetch data from Firestore
@@ -183,7 +86,7 @@ export default function Accomodation() {
             // Create accommodation object
             const accommodationData = {
                 ...formData,
-                images: imageUrls, // Save image URLs
+                images: imageUrls, 
             };
 
             // Save accommodation data to Firestore
@@ -201,6 +104,7 @@ export default function Accomodation() {
                 numberOfRooms: "",
                 amenities: [],
                 description: "",
+                title: "",
             });
 
             dispatch(handleAddingAccomodation(false));
@@ -218,7 +122,7 @@ export default function Accomodation() {
         setTimeout(() => {
             dispatch(handleAddingAccomodation(true));
             dispatch(handleLoader(false));
-        }, 3000);
+        }, 2000);
     };
 
     // HANDLE CLOSE
@@ -247,7 +151,7 @@ export default function Accomodation() {
             <div className="accomodation-header">
                 <h1>Accomodation</h1>
                 <button className="add-accomodation" onClick={handleOpenAccomdationForm}>
-                    Add Picture
+                    Add Accomodation
                 </button>
             </div>
             {/* ENDS */}
@@ -301,11 +205,11 @@ export default function Accomodation() {
                     {/* LEFT INPUTS */}
                     <div className="input-wrapper">
                         <input type="file" accept="image/*" multiple onChange={handleFileChange} />
-                        <input type="text" name="price" placeholder="Price" value={formData.price} onChange={handleChange} />
+                        <input type="number" min={1} name="price" placeholder="Price" value={formData.price} onChange={handleChange} />
                         <input type="text" name="availability" placeholder="Availability" value={formData.availability} onChange={handleChange} />
                         <input type="text" name="location" placeholder="Location" value={formData.location} onChange={handleChange} />
                         <input type="text" name="numberOfRooms" placeholder="Number of rooms" value={formData.numberOfRooms} onChange={handleChange} />
-                        {[...Array(4)].map((_, index) => (
+                        {[...Array(7)].map((_, index) => (
                             <input
                                 key={index}
                                 type="text"
@@ -318,6 +222,7 @@ export default function Accomodation() {
 
                     {/* RIGHT INPUTS */}
                     <div className="input-wrapper">
+                        <input type="text" name="title" placeholder="Title of the room" value={formData.title} onChange={handleChange} />
                         <textarea name="description" placeholder="Room description and policies" value={formData.description} onChange={handleChange} />
                     </div>
 

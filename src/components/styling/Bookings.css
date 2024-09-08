@@ -1,0 +1,158 @@
+.bookings-layout
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bookings-header
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    padding: 1em;
+}
+
+.overall-bookings
+{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1em;
+    gap: 1em;
+    overflow-y: auto;
+}
+
+.bookings-header-wrapper
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: .2em;
+    gap: .2em;
+    background: #1DA1F2;
+}
+
+.bookings-header-wrapper p
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 11.11%;
+    padding: .7em;
+    background: rgba(255, 255, 255, 0.5);
+    font-weight: 1000;
+    font-family: 'Helvetica Neue ';
+}
+
+.bookings-wrapper
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: .2em;
+}
+
+.bookings-wrapper p
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 12.25%;
+    height: 3em;
+    padding: .1em .7em;
+    background: #1DA1F2;
+    color: whitesmoke;
+}
+
+.bookings-wrapper .remove-button
+{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 11.11%;
+    padding: .7em 0;
+    gap: .7em;
+}
+
+.bookings-header h1
+{
+    color: rgba(0, 0, 0, .5);
+}
+.bookings-wrapper button
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .7em 1.1em;
+    border-radius: 10px;
+    background: #1877F2;
+    border: 2px solid #1877F2;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+    font-weight: 700;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.actions-button
+{
+    position: relative;
+    transition: all .5s .2s ease-in;
+    transition: all .5s .2s ease-out;
+}
+
+.tooltip
+{
+    position: absolute;
+    top: 0;
+    padding: 5px 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s ease;
+    color: white;
+    padding: .7em 1em;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    font-family: 'Helvetica Neue ';
+}
+
+
+
+.actions-button:hover .tooltip
+{
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.approve
+{
+    font-size: 1.9em;
+    color: lightgreen;
+}
+
+.decline
+{
+    font-size: 1.9em;
+    color: red;
+}
+
+.bookings-wrapper button:hover
+{
+    border-radius: 10px;
+    background: #1DA1F2;
+    border: 2px solid #1DA1F2;
+    transition: all .5s ease-in-out;
+}
