@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+#Hotel Management System - Admin Site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is the admin-side application for a hotel management platform. It provides an interface for administrators to manage hotels, monitor bookings, view analytics, and handle user reviews. The application is built using React and leverages various libraries for state management, data visualization, and authentication.
 
-## Available Scripts
+Getting Started
+This project was bootstrapped with Create React App.
 
+Prerequisites
+Ensure you have Node.js and npm installed on your machine. You can download them from the Node.js official website.
+
+Available Scripts
 In the project directory, you can run:
 
-### `npm start`
+npm start
+Runs the app in development mode.
+Open http://localhost:3000 to view it in your browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
+The page will reload if you make edits.
 You may also see any lint errors in the console.
 
-### `npm test`
+npm test
+Launches the test runner in the interactive watch mode.
+See the section about running tests for more information.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
+npm run build
+Builds the app for production to the build folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+See the section about deployment for more information.
 
-### `npm run eject`
+npm run eject
+Note: this is a one-way operation. Once you eject, you can't go back!
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Project Overview
+The admin-side application includes various functionalities for hotel management. Below is an overview of the key features:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Dashboard and Analytics
+Provides a comprehensive dashboard for monitoring hotel performance.
+Integrates recharts for data visualization, including charts for booking trends, revenue, and user activity.
+2. User and Booking Management
+Allows administrators to manage user accounts, including viewing, editing, and deleting users.
+Provides features to manage hotel bookings, including viewing current and past reservations.
+3. Hotel and Review Management
+Administrators can add, edit, and remove hotels from the platform.
+Enables managing user reviews, including approving, rejecting, or deleting reviews.
+4. State Management
+Uses redux and react-redux for global state management.
+Utilizes redux-thunk middleware for handling asynchronous operations, especially with Firebase and APIs.
+redux-persist is used to persist the Redux state across sessions.
+5. Authentication and Security
+Integrated with Firebase for authentication and real-time data storage.
+Uses Firebase's authentication services to manage admin login and permissions.
+6. Testing
+The application includes testing utilities with @testing-library/react, @testing-library/jest-dom, and @testing-library/user-event.
+Learn More
+You can learn more in the Create React App documentation.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To learn React, check out the React documentation.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Dependencies
+Below is a list of the key dependencies used in this project:
 
-## Learn More
+React: ^18.3.1
+Redux: ^5.0.1
+React-Redux: ^9.1.2
+Redux Thunk: ^3.1.0
+Redux Persist: ^6.0.0
+Firebase: ^10.13.1
+Recharts for data visualization: ^2.12.7
+Testing libraries: @testing-library/react, @testing-library/jest-dom, @testing-library/user-event
+React Icons for icons: ^5.3.0
+Code Splitting
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Analyzing the Bundle Size
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Making a Progressive Web App
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Code Splitting
+Advanced Configuration
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Deployment
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+npm run build fails to minify
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
