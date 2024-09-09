@@ -1,45 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../styling/Accomodation.css';
-import { useEffect, useState } from "react";
-
-// FIRESTORE IMPORT
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-
-// ICONS
 import { MdFavorite } from "react-icons/md";
 
-
-export default function Favorite(){
-
-    const [accommodations, setAccommodations] = useState([]);
-  
+export default function Favorite() {
+    const [favorites, setFavorites] = useState([]);
+    const [loading, setLoading] = useState(true); // Added loading state
 
     const db = getFirestore();
 
     useEffect(() => {
-        fetchAccommodations();
+        fetchFavorites();
     }, []);
 
-    const fetchAccommodations = async () => {
+    const fetchFavorites = async () => {
         try {
-            // Fetch favorite IDs
+            setLoading(true); // Start loading
+
+            // Fetch favorite documents
             const favoritesCollection = collection(db, "favorites");
             const favoritesSnapshot = await getDocs(favoritesCollection);
-            const favoritesList = favoritesSnapshot.docs.map(doc => doc.data().accommodationId);
+            const favoritesList = favoritesSnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
 
-            // Fetch accommodations
-            const accommodationsCollection = collection(db, "accommodations");
-            const accommodationsSnapshot = await getDocs(accommodationsCollection);
-            const accommodationsList = accommodationsSnapshot.docs
-                .map(doc => ({ id: doc.id, ...doc.data() }))
-                .filter(accommodation => favoritesList.includes(accommodation.id)); // Only include those in favorites
-
-            setAccommodations(accommodationsList);
+            setFavorites(favoritesList);
         } catch (error) {
             console.error("Error fetching data:", error);
+        } finally {
+            setLoading(false); // End loading
         }
     };
-    console.log( {accommodations})
+
+    if (loading) {
+        return <p>Loading...</p>; // Show loading indicator
+    }
 
     return(
         <div className="accomodation-layout">
@@ -52,35 +48,36 @@ export default function Favorite(){
             {/* ACCOMODATION GRID */}
             <div className="accomodation-grid">
                 <div className="accomodation-aligning">
-                {accommodations.map((accommodation) => (
-                    <div className="accomodation-grid-item" key={accommodation.id}>
+                {favorites.map((favorite) => (
+                    <div className="accomodation-grid-item" key={favorite.id}>
                         {/* PICTURE */}
                         <div className="room-pictures">
-                            <img src={accommodation.images[2]} alt="pictures" className="accomodation-image"/>
+                            <img src={favorite.images[2]} alt="pictures" className="accomodation-image"/>
                         </div>
 
                         {/* CONTENT */}
                         <div className="accomodation-content">
                             <p><strong>Available:</strong> <br></br>
-                                 {accommodation.availability}
+                                 {favorite.availability}
                             </p>
 
-                            <p><strong>{accommodation.price} ZAR</strong> night</p>
-                            <p><strong>{accommodation.location}</strong></p>
+                            <p><strong>{favorite.price} ZAR</strong> night</p>
+                            <p><strong>{favorite.location}</strong></p>
                             <p>
-                                {accommodation.amenities[0]}--
-                                {accommodation.amenities[1]}
+                                {favorite.amenities[0]}--
+                                {favorite.amenities[1]}
                                 <br></br>
-                                {accommodation.amenities[2]}--
-                                {accommodation.amenities[3]}
+                                {favorite.amenities[2]}--
+                                {favorite.amenities[3]}
                             </p>
-                            <p>{accommodation.numberOfRooms}</p>
+                            <p>{favorite
+                            .numberOfRooms}</p>
                             <p>
                                 <strong>What we offers</strong>
 
                                 <br></br>
 
-                                {accommodation.description}
+                                {favorite.description}
                             </p>
                         </div>
 
@@ -88,7 +85,7 @@ export default function Favorite(){
                         <div className="likes">
                             <MdFavorite className="love-icon"/>
                             <p className="number-of-likes">
-                                {accommodation.likes || 0} likes
+                                {favorite.likes || 0} likes
                             </p>
                         </div>
 
