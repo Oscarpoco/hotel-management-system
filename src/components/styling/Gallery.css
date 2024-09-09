@@ -84,8 +84,8 @@
 {
     border: 1px solid rgba(0, 0, 0, .1);
     padding: .7em 1em;
-    background: #DD2A7B;
-    color: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .9);
+    color: rgba(255, 255, 255, .9);
     display: flex;
     align-items: center;
     cursor: pointer;

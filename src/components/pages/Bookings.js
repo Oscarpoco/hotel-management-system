@@ -37,8 +37,9 @@ export default function Bookings() {
     // Function to update booking status
     const updateBookingStatus = async (bookingId, newStatus) => {
         try {
-            const bookingDocRef = doc(firestore, "bookings", bookingId); // Reference to the booking document
-            await updateDoc(bookingDocRef, { status: newStatus }); // Update the status field in Firestore
+            const bookingDocRef = doc(firestore, "bookings", bookingId); 
+            await updateDoc(bookingDocRef, { status: newStatus }); 
+            alert("Successfully updated status");
 
             // Update the bookings state after successfully updating Firestore
             setBookings((prevBookings) =>
@@ -48,6 +49,7 @@ export default function Bookings() {
             );
         } catch (error) {
             console.error("Error updating booking status:", error);
+            alert("Error updating booking status")
         }
     };
 

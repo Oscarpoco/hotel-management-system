@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import '../styling/Accomodation.css';
+import { handleLoader } from "../../redux/actions/UserInterface";
+import { useDispatch } from "react-redux";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { MdFavorite } from "react-icons/md";
 
 export default function Favorite() {
     const [favorites, setFavorites] = useState([]);
-    const [loading, setLoading] = useState(true); // Added loading state
+    const dispatch = useDispatch();
 
     const db = getFirestore();
 
@@ -15,7 +17,7 @@ export default function Favorite() {
 
     const fetchFavorites = async () => {
         try {
-            setLoading(true); // Start loading
+            dispatch(handleLoader(true)); 
 
             // Fetch favorite documents
             const favoritesCollection = collection(db, "favorites");
@@ -29,13 +31,10 @@ export default function Favorite() {
         } catch (error) {
             console.error("Error fetching data:", error);
         } finally {
-            setLoading(false); // End loading
+            dispatch(handleLoader(true)); 
         }
     };
 
-    if (loading) {
-        return <p>Loading...</p>; // Show loading indicator
-    }
 
     return(
         <div className="accomodation-layout">

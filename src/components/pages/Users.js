@@ -27,26 +27,26 @@ export default function Users() {
     // Function to block a user
     const handleBlockUser = async (userId) => {
         try {
-            const userRef = doc(db, "users", userId); // Reference to the user document
-            await updateDoc(userRef, { status: "blocked" }); // Update the status to "blocked"
-            alert("User has been blocked successfully."); // Show success alert
-            fetchUsers(); // Refresh the users list
+            const userRef = doc(db, "users", userId);
+            await updateDoc(userRef, { status: "blocked" });
+            alert("User has been blocked successfully.");
+            fetchUsers();
         } catch (error) {
             console.error("Error blocking user: ", error);
-            alert("Failed to block the user. Please try again."); // Show failure alert
+            alert("Failed to block the user. Please try again."); 
         }
     };
 
     // Function to unblock a user
     const handleUnblockUser = async (userId) => {
         try {
-            const userRef = doc(db, "users", userId); // Reference to the user document
-            await updateDoc(userRef, { status: "active" }); // Update the status to "active"
-            alert("User has been unblocked successfully."); // Show success alert
-            fetchUsers(); // Refresh the users list
+            const userRef = doc(db, "users", userId);
+            await updateDoc(userRef, { status: "active" });
+            alert("User has been unblocked successfully.");
+            fetchUsers(); 
         } catch (error) {
             console.error("Error unblocking user: ", error);
-            alert("Failed to unblock the user. Please try again."); // Show failure alert
+            alert("Failed to unblock the user. Please try again.");
         }
     };
 
