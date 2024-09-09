@@ -5,12 +5,12 @@ import '../styling/Bookings.css';
 import { MdDoneAll } from "react-icons/md";
 import { TiCancel } from "react-icons/ti";
 
-// Import Firestore from your firebase.js file
-import { firestore } from "../../firebase/Firebase"; 
-import { collection, getDocs } from "firebase/firestore";
+// Import Firestore and Firestore methods from firebase.js
+import { firestore } from "../../firebase/Firebase";
+import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 
 export default function Bookings() {
-    const [bookings, setBookings] = useState([]); 
+    const [bookings, setBookings] = useState([]);
 
     // Fetch bookings from Firestore
     useEffect(() => {
@@ -34,6 +34,23 @@ export default function Bookings() {
         fetchBookings();
     }, []);
 
+    // Function to update booking status
+    const updateBookingStatus = async (bookingId, newStatus) => {
+        try {
+            const bookingDocRef = doc(firestore, "bookings", bookingId); // Reference to the booking document
+            await updateDoc(bookingDocRef, { status: newStatus }); // Update the status field in Firestore
+
+            // Update the bookings state after successfully updating Firestore
+            setBookings((prevBookings) =>
+                prevBookings.map((booking) =>
+                    booking.id === bookingId ? { ...booking, status: newStatus } : booking
+                )
+            );
+        } catch (error) {
+            console.error("Error updating booking status:", error);
+        }
+    };
+
     return (
         <div className="bookings-layout">
             {/* BOOKING HEADER */}
@@ -45,34 +62,38 @@ export default function Bookings() {
             {/* BOOKINGS */}
             <div className="overall-bookings">
                 <div className="bookings-header-wrapper">
-                    {/* <p>Fullnames</p> */}
-                    <p style={{width: '10%'}}>Check in</p>
-                    <p style={{width: '10%'}}>Check out</p>
-                    <p style={{width: '10%'}}>Guests</p>
-                    <p style={{width: '10%'}}>Nights</p>
-                    <p style={{width: '20%'}}>Created At</p>
-                    <p style={{width: '10%'}}>Price</p>
-                    <p style={{width: '20%'}}>UserId</p>
-                    <p style={{width: '10%'}}>Action</p>
+                    <p style={{ width: '10%' }}>Check in</p>
+                    <p style={{ width: '10%' }}>Check out</p>
+                    <p style={{ width: '10%' }}>Guests</p>
+                    <p style={{ width: '10%' }}>Nights</p>
+                    <p style={{ width: '20%' }}>Created At</p>
+                    <p style={{ width: '10%' }}>Price</p>
+                    <p style={{ width: '20%' }}>UserId</p>
+                    <p style={{ width: '10%' }}>Action</p>
                 </div>
 
                 {/* Display each booking */}
                 {bookings.map((booking) => (
                     <div key={booking.id} className="bookings-wrapper">
-                        {/* <p>{booking.fullnames}</p> */}
-                        <p style={{width: '10%'}}>{booking.checkIn}</p>
-                        <p style={{width: '10%'}}>{booking.checkOut}</p>
-                        <p style={{width: '10%'}}>{booking.guests}</p>
-                        <p style={{width: '10%'}}>{booking.nights}</p>
-                        <p style={{width: '20%'}}>{booking.createdAt}</p>
-                        <p style={{width: '10%'}}>{booking.totalPrice} ZAR</p>
-                        <p style={{width: '20%'}}>{booking.userId}</p>
-                        <div className="remove-button" style={{width: '10%'}}>
-                            <button className="actions-button">
+                        <p style={{ width: '10%' }}>{booking.checkIn}</p>
+                        <p style={{ width: '10%' }}>{booking.checkOut}</p>
+                        <p style={{ width: '10%' }}>{booking.guests}</p>
+                        <p style={{ width: '10%' }}>{booking.nights}</p>
+                        <p style={{ width: '20%' }}>{booking.createdAt}</p>
+                        <p style={{ width: '10%' }}>{booking.totalPrice} ZAR</p>
+                        <p style={{ width: '20%' }}>{booking.userId}</p>
+                        <div className="remove-button" style={{ width: '10%' }}>
+                            <button
+                                className="actions-button"
+                                onClick={() => updateBookingStatus(booking.id, "approved")}
+                            >
                                 <span className="tooltip" style={{ background: "#25D366" }}>Approve</span>
                                 <MdDoneAll className="approve" />
                             </button>
-                            <button className="actions-button">
+                            <button
+                                className="actions-button"
+                                onClick={() => updateBookingStatus(booking.id, "declined")}
+                            >
                                 <span className="tooltip" style={{ background: "#DD2A7B" }}>Decline</span>
                                 <TiCancel className="decline" />
                             </button>

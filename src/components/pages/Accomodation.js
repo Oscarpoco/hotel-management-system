@@ -1,10 +1,8 @@
-
-
 import React, { useState, useEffect } from "react";
 import '../styling/Accomodation.css';
 import { useSelector, useDispatch } from "react-redux";
 import { handleAddingAccomodation, handleLoader } from "../../redux/actions/UserInterface";
-import { getFirestore, collection, addDoc, doc, getDocs, deleteDoc } from "firebase/firestore"; // Firestore imports
+import { getFirestore, collection, addDoc, doc, getDocs, deleteDoc, updateDoc } from "firebase/firestore"; // Firestore imports
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Firebase Storage imports
 import { storage } from "../../firebase/Firebase"; // Your Firebase storage import
 
@@ -49,6 +47,21 @@ export default function Accomodation() {
         }
     };
 
+    // Function to update availability status
+    const updateAvailability = async (id, status) => {
+        try {
+            dispatch(handleLoader(true)); 
+            const docRef = doc(db, "accommodations", id); 
+            await updateDoc(docRef, { availability: status }); 
+            // Refresh accommodations list after update
+            fetchAccommodations();
+        } catch (error) {
+            console.error("Error updating availability:", error);
+        } finally {
+            dispatch(handleLoader(false)); 
+        }
+    };
+
     // Handle file change
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
@@ -86,7 +99,7 @@ export default function Accomodation() {
             // Create accommodation object
             const accommodationData = {
                 ...formData,
-                images: imageUrls, 
+                images: imageUrls,
             };
 
             // Save accommodation data to Firestore
@@ -159,47 +172,51 @@ export default function Accomodation() {
             {/* ACCOMODATION GRID */}
             <div className="accomodation-grid">
                 <div className="accomodation-aligning">
-                {accommodations.map((accommodation) => (
-                    <div className="accomodation-grid-item" key={accommodation.id}>
-                        {/* PICTURE */}
-                        <div className="room-pictures">
-                            <img src={accommodation.images[2]} alt="pictures" className="accomodation-image"/>
+                    {accommodations.map((accommodation) => (
+                        <div className="accomodation-grid-item" key={accommodation.id}>
+                            {/* PICTURE */}
+                            <div className="room-pictures">
+                                <img src={accommodation.images[2]} alt="pictures" className="accomodation-image"/>
+                            </div>
+
+                            {/* CONTENT */}
+                            <div className="accomodation-content">
+                                <p><strong>Available:</strong> <br></br>
+                                     {accommodation.availability}
+                                </p>
+
+                                <p><strong>{accommodation.price} ZAR</strong> night</p>
+                                <p><strong>{accommodation.location}</strong></p>
+                                <p>
+                                    {accommodation.amenities[0]}--
+                                    {accommodation.amenities[1]}
+                                    <br></br>
+                                    {accommodation.amenities[2]}--
+                                    {accommodation.amenities[3]}
+                                </p>
+                                <p>{accommodation.numberOfRooms}</p>
+                                <p>
+                                    <strong>What we offers</strong>
+
+                                    <br></br>
+
+                                    {accommodation.description}
+                                </p>
+                            </div>
+
+                            {/* DELETE */}
+                            <button className="delete-image" onClick={() => handleDelete(accommodation.id)}><strong>Remove</strong></button>
+                            
+                            {/* Update availability buttons */}
+                            <button className="accommodation-availability-available" onClick={() => updateAvailability(accommodation.id, "available")}><strong>Available</strong></button>
+                            <button className="accommodation-availability-booked" onClick={() => updateAvailability(accommodation.id, "booked")}><strong>Booked</strong></button>
                         </div>
-
-                        {/* CONTENT */}
-                        <div className="accomodation-content">
-                            <p><strong>Available:</strong> <br></br>
-                                 {accommodation.availability}
-                            </p>
-
-                            <p><strong>{accommodation.price} ZAR</strong> night</p>
-                            <p><strong>{accommodation.location}</strong></p>
-                            <p>
-                                {accommodation.amenities[0]}--
-                                {accommodation.amenities[1]}
-                                <br></br>
-                                {accommodation.amenities[2]}--
-                                {accommodation.amenities[3]}
-                            </p>
-                            <p>{accommodation.numberOfRooms}</p>
-                            <p>
-                                <strong>What we offers</strong>
-
-                                <br></br>
-
-                                {accommodation.description}
-                            </p>
-                        </div>
-
-                        {/* DELETE */}
-                        <button className="delete-image" onClick={() => handleDelete(accommodation.id)}><strong>Remove</strong></button>
-                    </div>
-                ))}
+                    ))}
                 </div>
             </div>
             {/* ENDS */}
 
-            {/* POOPUP */}
+            {/* POPUP */}
             {addingAccomodation && (
                 <form className="accomodations-form" onSubmit={handleSubmit}>
                     {/* LEFT INPUTS */}

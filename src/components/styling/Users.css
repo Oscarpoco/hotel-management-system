@@ -77,10 +77,11 @@
 .user-wrapper .remove-button
 {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     width: 16.66%;
     padding: .7em;
+    gap: .5em;
 }
 
 .user-header h1

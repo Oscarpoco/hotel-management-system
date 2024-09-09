@@ -95,7 +95,9 @@
     right: 0;
 }
 
-.delete-image:hover
+.delete-image:hover,
+.accommodation-availability-available:hover,
+.accommodation-availability-booked:hover
 {
     border: 1px solid rgba(0, 0, 0, .1);
     padding: .7em 1em;
