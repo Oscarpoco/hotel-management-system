@@ -29,7 +29,7 @@ export default function Notifications(){
             {/* NOTIFICATIONS HEADER */}
             <div className="notifications-header">
                 <h1>Notifications</h1>
-                <button className="open-form" onClick={handleOpenForm}>Send Message</button>
+                <button className="open-form" onClick={handleOpenForm}>Send</button>
             </div>
             {/* ENDS */}
 

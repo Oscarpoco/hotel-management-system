@@ -9,6 +9,7 @@
     right: 1%;
     border: 1px solid rgba(0, 0, 0, .1);
     box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+    z-index: 2;
 }
 
 .on-profile-content
@@ -21,7 +22,7 @@
     align-items: center;
     padding: 1em 0;
     gap: .7em;
-    background: rgba(0, 0, 0, .8); 
+    background: rgba(0, 0, 0, .9); 
 }
 
 .profile-header
@@ -144,4 +145,33 @@
 .on-profile-content form label
 {
     padding-left: 0;
+}
+
+@media only screen and (max-width: 740px) {
+
+    .on-profile-layout
+    {
+        height: 95%;
+        width: 80%;
+        background: white;
+        position: fixed;
+        top: 1%;
+        right: 1%;
+        border: 1px solid rgba(0, 0, 0, .1);
+        box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+    }
+
+    .profile-header h3
+    {
+        font-size: 1em;
+        width: 70%;
+    }
+    
+    .profile-header .back-arrow
+    {
+        color: whitesmoke;
+        width: 15%;
+        font-size: 1.7em;
+    }
+    
 }

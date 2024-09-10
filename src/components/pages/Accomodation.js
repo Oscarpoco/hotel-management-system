@@ -164,7 +164,7 @@ export default function Accomodation() {
             <div className="accomodation-header">
                 <h1>Accomodation</h1>
                 <button className="add-accomodation" onClick={handleOpenAccomdationForm}>
-                    Add Accomodation
+                    Add
                 </button>
             </div>
             {/* ENDS */}

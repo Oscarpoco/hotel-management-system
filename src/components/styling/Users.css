@@ -36,22 +36,22 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: .2em;
-    gap: .2em;
-    background: #1DA1F2;
+    padding: 1em .2em;
+    gap: .3em;
 }
 
 .user-header-wrapper p
-{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 16.66%;
-    padding: .7em;
-    background: rgba(255, 255, 255, 0.5);
-    font-weight: 1000;
-    font-family: 'Helvetica Neue ';
-}
+    {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1em .7em;
+        font-weight: 1000;
+        font-family: 'Helvetica Neue ';
+        flex-shrink: 0;
+        background: black;
+        color: azure;
+    }
 
 .user-wrapper
 {
@@ -68,20 +68,43 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 16.66%;
-    padding: .7em;
+    padding: 1.3em .7em;
     background: #1DA1F2;
     color: whitesmoke;
 }
 
-.user-wrapper .remove-button
+.name,
+.location,
+.user-id
+{
+    min-width: 20%;
+    flex-shrink: 0;
+    background: #1DA1F2;
+}
+
+.status,
+.phone
+{
+    min-width: 10%;
+    flex-shrink: 0;
+    background: #1DA1F2;
+}
+
+.age
+{
+    min-width: 8%;
+    flex-shrink: 0;
+    background: #1DA1F2;
+}
+
+.remove-button
 {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 16.66%;
-    padding: .7em;
+    min-width: 10%;
     gap: .5em;
+    flex-shrink: 0;
 }
 
 .user-header h1
@@ -109,4 +132,51 @@
     background: #1DA1F2;
     border: 2px solid #1DA1F2;
     transition: all .5s ease-in-out;
+}
+
+@media only screen and (max-width: 740px) {
+
+    .user-header-wrapper p
+    {
+        font-size: .8em;
+    }
+
+    .user-wrapper p
+    {
+        font-size: .8em;
+    }
+
+    .name,
+    .location,
+    .user-id
+    {
+        min-width: 100%;
+        flex-shrink: 0;
+        background: #1DA1F2;
+    }
+    
+    .status,
+    .phone
+    {
+        min-width: 30%;
+        flex-shrink: 0;
+        background: #1DA1F2;
+    }
+    
+    .age
+    {
+        min-width: 20%;
+        flex-shrink: 0;
+        background: #1DA1F2;
+    }
+    
+    .remove-button
+    {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        min-width: 50%;
+        gap: .5em;
+        flex-shrink: 0;
+    }
 }

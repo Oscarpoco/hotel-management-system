@@ -61,24 +61,24 @@ export default function Users() {
             {/* USERS */}
             <div className="overall-users">
                 <div className="user-header-wrapper">
-                    <p style={{width: '20%'}}>Name & Surname</p>
-                    <p style={{width: '20%'}}>Location</p>
-                    <p style={{width: '5%'}}>Age</p>
-                    <p style={{width: '10%'}}>Status</p>
-                    <p style={{width: '10%'}}>Phone</p>
-                    <p style={{ width: '20%' }}>UserId</p>
-                    <p style={{width: '15%'}}>Action</p>
+                    <p className="name">Name & Surname</p>
+                    <p className="location">Location</p>
+                    <p className="age">Age</p>
+                    <p className="status">Status</p>
+                    <p className="phone">Phone</p>
+                    <p className="user-id">UserId</p>
+                    <p className="remove-button">Action</p>
                 </div>
                 {/* Dynamic list of users */}
                 {users.map((user) => (
                     <div className="user-wrapper" key={user.id}>
-                        <p style={{width: '20%'}}>{user.fullnames}</p>
-                        <p style={{width: '20%'}}>{user.location}</p>
-                        <p style={{width: '5%'}}>{user.age}</p>
-                        <p style={{width: '10%'}}>{user.status}</p>
-                        <p style={{width: '10%'}}>{user.phone}</p>
-                        <p style={{ width: '20%' }}>{user.id}</p>
-                        <div className="remove-button" style={{width: '15%'}}>
+                        <p className="name">{user.fullnames}</p>
+                        <p className="location">{user.location}</p>
+                        <p className="age">{user.age}</p>
+                        <p className="status">{user.status}</p>
+                        <p className="phone">{user.phone}</p>
+                        <p className="user-id">{user.id}</p>
+                        <div className="remove-button" >
                             <button onClick={() => handleBlockUser(user.id)}>Block</button>
                             <button onClick={() => handleUnblockUser(user.id)}>Unblock</button>
                         </div>

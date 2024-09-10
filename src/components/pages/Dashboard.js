@@ -87,6 +87,7 @@ function Dashboard(){
                                 <br></br>
                                 <span>Management System</span></h3>
                                 <button type="submit" className="home-button" onClick={() =>handleChangeView('home')}><FaHome className="sidebar-icons"/> Home</button>
+                                <MdClose className="menu-close-icon" onClick={HandleToggleSideBar}/>
                             </div>
                         </div>
                         {/* ENDS */}

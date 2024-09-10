@@ -51,7 +51,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 2em;
     cursor: pointer;
     position: relative;
     z-index: 1;
@@ -71,7 +71,7 @@
 
 .home-icons 
 {
-    font-size: 4em; 
+    font-size: 6em; 
 }
 
 .home-icons:hover 
@@ -79,4 +79,16 @@
     transform: rotate(25deg) scale(1.1);
 }
 
+@media only screen and (max-width: 740px) {
+    
+    .home h1
+    {
+        font-size: 1.7em;
+    }
 
+    .dashboard-content-wrapper
+    {
+        overflow-y: auto;
+    }
+
+}

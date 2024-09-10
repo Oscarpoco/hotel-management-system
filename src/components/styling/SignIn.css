@@ -10,14 +10,14 @@
 
 .signIn-wrapper span
 {
-    color: white;
+    color: rgba(0, 0, 0, .8);
     font-size: 1em;
 }
 
 .signIn-wrapper h2
 .signIn-wrapper h3
 {
-    color: black;
+    color: rgba(0, 0, 0, .8);
 }
 
 /* LOGO WRAPPER BAR */
@@ -28,7 +28,7 @@
     display: flex;
     align-items: center;
     gap: .7em;
-    background: rgba(0, 0, 0, .2);
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.8),rgba(255, 255, 255, 0.5));
     padding: 0 1em;
     box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
 }
@@ -41,7 +41,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    background: rgba(255, 255, 255, .4);
+    color: rgba(0, 0, 0, .8);
 }
 
 .form-header-wrapper
@@ -52,7 +54,8 @@
     align-items: center;
     width: 100%;
     height: 85%;
-    background: rgba(0, 0, 0, .5);
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.8));
+
 }
 
 
@@ -158,4 +161,36 @@ form button:hover
     -webkit-backdrop-filter: blur(100px);
     backdrop-filter: blur(100px);
     transition: all .5s ease;
+}
+
+@media only screen and (max-width: 740px) {
+
+    .logo-bar
+    {
+        height: 10%;
+    }
+
+    .logo-bar .logo-abbreviation
+    {
+        height: 50px;
+        width: 50px;
+        font-size: .9em;
+    }
+
+    .form-header-wrapper
+    {
+        height: 90%;
+    }
+
+    /* FORM WRAPPER */
+    .form-wrapper
+    {
+    width: 80%;
+    }
+
+    .input-wrapper
+    {
+        width: 85%;
+    }
+    
 }
