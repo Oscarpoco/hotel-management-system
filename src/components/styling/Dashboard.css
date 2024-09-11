@@ -277,7 +277,8 @@ nav
 
 .logout-icon
 {
-   font-size: 1.5em;
+   font-size: 2.5em;
+   color: rgba(0, 0, 0, .5);
 }
 
 /* CONTENT */
@@ -320,6 +321,11 @@ nav
     .side-bar-logo 
     {
         position: relative;
+    }
+
+    .user-profile
+    {
+        gap: .5em;
     }
 
 }

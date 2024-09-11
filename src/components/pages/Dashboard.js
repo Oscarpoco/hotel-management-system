@@ -1,7 +1,9 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import '../styling/Dashboard.css';
 import { useSelector, useDispatch } from "react-redux";
-
+// FIRESTORE
+import { getFirestore, doc, getDoc, updateDoc,  } from "firebase/firestore";
 // actions
 import { handleSideBar, onProfileOpen, handleLoader } from "../../redux/actions/UserInterface";
 import { setView } from "../../redux/actions/View";
@@ -29,7 +31,27 @@ import SwitchBetweenComponents from "./SwitchingComponents";
 function Dashboard(){
 
     const isSideBarOpen = useSelector((state)=> state.userInterface.isSideBarOpen);
+    const userId = useSelector((state) => state.userInterface.userId);
     const dispatch = useDispatch();
+    const [userData, setUserData] = useState(null);
+    const [profilePictureUrl, setProfilePictureUrl] = useState('');
+
+    const firestore = getFirestore();
+
+    useEffect(() => {
+        if (userId) {
+            // Fetch user data
+            const fetchUserData = async () => {
+                const userDoc = doc(firestore, "admins", userId);
+                const userSnap = await getDoc(userDoc);
+                if (userSnap.exists()) {
+                    setUserData(userSnap.data());
+                    setProfilePictureUrl(userSnap.data().profilePictureUrl || ''); 
+                }
+            };
+            fetchUserData();
+        }
+    }, [userId, firestore]);
 
     // LOGOUT
     const handleLogout = () => {
@@ -127,14 +149,14 @@ function Dashboard(){
 
                             <div className="admin-wrapper">
                                 <span><p>Admin</p></span>
-                                <p className="admin">Oscar Poco</p>
+                                <p className="admin">{userData?.name || 'Not available'}</p>
                             </div>
                         </div>
 
                         {/* ADMIN PROFILE */}
                         <div className="user-profile">
                             <div className="profile" onClick={HnadleOpenProfile}>
-                                <img src="boy.jpg" alt="profile-picture"></img>
+                                <img src={profilePictureUrl} alt="profile-picture"></img>
                             </div>
                             <div className="logout">
                                 <RiLogoutCircleRLine className="logout-icon" onClick={handleLogout}/>

@@ -1,18 +1,18 @@
-
 import React, { useState } from "react";
 import "../styling/SignIn.css";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSigning, handleLoader } from "../../redux/actions/UserInterface";
 import { handleCloseNotificationAlert, handleOpenNotificationAlert } from "../../redux/actions/AlertNotification";
-import { auth } from "../../firebase/Firebase"; // Import Firebase Auth
 import { signInWithEmailAndPassword } from "firebase/auth"; // Import Firebase sign-in method
+import { auth } from "../../firebase/Firebase"; // Import Firebase Auth
+import { setUserId } from "../../redux/actions/UserInterface";
 import NotificationArlet from "./NotificationArlet";
 
 function SignIn() {
     const dispatch = useDispatch();
     const notification = useSelector((state) => state.notification);
 
-    const [email, setEmail] = useState(""); // Changed to email
+    const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState("");
 
     // HANDLE SUBMIT
@@ -24,7 +24,9 @@ function SignIn() {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in successfully
-              
+                const user = userCredential.user;
+                dispatch(setUserId(user.uid)); // Store userId in Redux
+
                 dispatch(handleOpenNotificationAlert('Login successful!'));
                 setTimeout(() => dispatch(handleCloseNotificationAlert()), 3000);
 

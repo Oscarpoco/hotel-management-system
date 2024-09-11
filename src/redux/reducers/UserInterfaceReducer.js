@@ -5,7 +5,7 @@ import { IS_SIGNED_IN,
     ON_UPDATE_PROFILE, 
     ON_ADD_ACCOMODATION, 
     IS_LOADER_OPEN, 
-    
+    SET_USER_ID ,
 } 
 from '../actions/UserInterface';
 
@@ -17,7 +17,7 @@ const initialState = {
     updatingProfile: false,
     addingAccomodation: false,
     isLoading: false,
-    
+    userId: null,
 };
 
 const UserInterfaceReducer = (state = initialState, action) => {
@@ -76,6 +76,13 @@ const UserInterfaceReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: !state.isLoading
             }
+
+        // USERID
+        case SET_USER_ID:
+            return {
+                ...state,
+                userId: action.payload, 
+            };
 
         
         default:

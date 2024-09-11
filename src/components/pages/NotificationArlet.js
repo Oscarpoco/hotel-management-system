@@ -16,10 +16,11 @@ export default function NotificationArlet({message, onClose, notificationArletVi
             height: '100%',
             width: '100%',
             background: 'rgba(0, 0, 0, .7)',
-            zIndex: 10000,
+            zIndex: 1000000,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'flex-start',
+            padding: '2em'
             
         }}
         >
@@ -37,11 +38,24 @@ export default function NotificationArlet({message, onClose, notificationArletVi
                 marginTop: '4em',
                 flexDirection: 'column',
                 gap: '1em',
+                borderRadius: '20px',
             }}
             >
                 {/* CONTENT */}
                 <p style={{fontSize: '1.5em', color: 'whitesmoke'}}>{message}</p>
-                <button onClick={onClose}>Close</button>
+                <button onClick={onClose}
+                    style={{
+                        background: 'white',
+                        padding: '.5em .7em',
+                        boxShadow: '0px 0px 10px rgba(0, 0, 0, .1)',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius: '20px',
+                        color: 'black',
+                    }}
+                
+                >Close</button>
                 {/* ENDS */}
             </div>
         </div>

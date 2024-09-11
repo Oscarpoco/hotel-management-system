@@ -91,4 +91,17 @@
         overflow-y: auto;
     }
 
+    .dashboard-grid-item
+    {
+        border-radius: 20px;
+        height: 180px;
+        gap: 1.5em;
+
+    }
+
+    .dashboard-grid
+    {
+        gap: 1.5em;
+    }
+
 }

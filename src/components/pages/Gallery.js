@@ -111,7 +111,7 @@ export default function Gallery() {
             {/* GALLERY HEADER */}
             <div className="gallery-header">
                 <h1>Gallery</h1>
-                <input type="file" onChange={handleFileChange} /> {/* Input for selecting file */}
+                <input type="file" multiple onChange={handleFileChange} /> {/* Input for selecting file */}
                 <button className="add-picture" onClick={handleUpload}>Add</button> {/* Button to upload */}
             </div>
             {/* ENDS */}

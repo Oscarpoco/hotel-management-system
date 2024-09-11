@@ -27,7 +27,6 @@
     justify-content: flex-start;
     align-items: center;
     padding: 1em;
-    gap: 1em;
     overflow-y: auto;
 }
 
@@ -37,9 +36,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: .2em;
-    gap: .2em;
-    background: #1DA1F2;
+    padding:.2em;
+    gap: .3em;
 }
 
 .bookings-header-wrapper p
@@ -47,11 +45,12 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 11.11%;
-    padding: .7em;
-    background: rgba(255, 255, 255, 0.5);
+    padding: 1em .7em;
     font-weight: 1000;
     font-family: 'Helvetica Neue ';
+    flex-shrink: 0;
+    background: black;
+    color: azure;
 }
 
 .bookings-wrapper
@@ -60,7 +59,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    gap: .2em;
+    padding: .2em;
+    gap: .3em;
 }
 
 .bookings-wrapper p
@@ -68,22 +68,38 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    flex-wrap: wrap;
-    width: 12.25%;
-    height: 3em;
-    padding: .1em .7em;
+    padding: 1.3em .7em;
     background: #1DA1F2;
     color: whitesmoke;
 }
 
-.bookings-wrapper .remove-button
+.remove-button-actions
 {
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
-    width: 11.11%;
-    padding: .7em 0;
-    gap: .7em;
+    min-width: 10%;
+    gap: .5em;
+    flex-shrink: 0;
+}
+
+.check-in-data,
+.check-out-data,
+.nights,
+.price
+{
+    min-width: 10%;
+    flex-shrink: 0;
+    background: #1DA1F2;
+}
+
+.user-id-data,
+.time,
+.guests
+{
+    min-width: 20%;
+    flex-shrink: 0;
+    background: #1DA1F2;
 }
 
 .bookings-header h1
@@ -95,7 +111,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .7em 1.1em;
+    padding: 1.1em;
     border-radius: 10px;
     background: #1877F2;
     border: 2px solid #1877F2;
@@ -139,13 +155,13 @@
 
 .approve
 {
-    font-size: 1.9em;
+    /* font-size: 1.9em; */
     color: lightgreen;
 }
 
 .decline
 {
-    font-size: 1.9em;
+    /* font-size: 1.9em; */
     color: red;
 }
 
@@ -155,4 +171,48 @@
     background: #1DA1F2;
     border: 2px solid #1DA1F2;
     transition: all .5s ease-in-out;
+}
+
+@media only screen and (max-width: 740px) {
+    
+
+    .bookings-header-wrapper p
+    {
+        font-size: .8em;
+    }
+    
+    .bookings-wrapper p
+    {
+        font-size: .8em;
+    }
+    
+    .remove-button-actions
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 50%;
+        gap: .5em;
+        flex-shrink: 0;
+    }
+    
+    .check-in-data,
+    .check-out-data,
+    .nights,
+    .price
+    {
+        min-width: 50%;
+        flex-shrink: 0;
+        background: #1DA1F2;
+    }
+    
+    .user-id-data,
+    .time,
+    .guests
+    {
+        min-width: 100%;
+        flex-shrink: 0;
+        background: #1DA1F2;
+    }
+    
 }

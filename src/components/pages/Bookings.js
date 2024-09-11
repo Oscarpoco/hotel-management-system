@@ -64,27 +64,27 @@ export default function Bookings() {
             {/* BOOKINGS */}
             <div className="overall-bookings">
                 <div className="bookings-header-wrapper">
-                    <p style={{ width: '10%' }}>Check in</p>
-                    <p style={{ width: '10%' }}>Check out</p>
-                    <p style={{ width: '10%' }}>Guests</p>
-                    <p style={{ width: '10%' }}>Nights</p>
-                    <p style={{ width: '20%' }}>Created At</p>
-                    <p style={{ width: '10%' }}>Price</p>
-                    <p style={{ width: '20%' }}>UserId</p>
-                    <p style={{ width: '10%' }}>Action</p>
+                    <p className="check-in-data">Check in</p>
+                    <p className="check-out-data">Check out</p>
+                    <p className="guests">Guests</p>
+                    <p className="nights">Nights</p>
+                    <p className="time">Created At</p>
+                    <p className="price">Price</p>
+                    <p className="user-id-data">UserId</p>
+                    <p className="remove-button-actions">Action</p>
                 </div>
 
                 {/* Display each booking */}
                 {bookings.map((booking) => (
                     <div key={booking.id} className="bookings-wrapper">
-                        <p style={{ width: '10%' }}>{booking.checkIn}</p>
-                        <p style={{ width: '10%' }}>{booking.checkOut}</p>
-                        <p style={{ width: '10%' }}>{booking.guests}</p>
-                        <p style={{ width: '10%' }}>{booking.nights}</p>
-                        <p style={{ width: '20%' }}>{booking.createdAt}</p>
-                        <p style={{ width: '10%' }}>{booking.totalPrice} ZAR</p>
-                        <p style={{ width: '20%' }}>{booking.userId}</p>
-                        <div className="remove-button" style={{ width: '10%' }}>
+                        <p className="check-in-data">{booking.checkIn}</p>
+                        <p className="check-out-data">{booking.checkOut}</p>
+                        <p className="guests">{booking.guests}</p>
+                        <p className="nights">{booking.nights}</p>
+                        <p className="time">{booking.createdAt}</p>
+                        <p className="price">{booking.totalPrice} ZAR</p>
+                        <p className="user-id-data">{booking.userId}</p>
+                        <div className="remove-button-actions">
                             <button
                                 className="actions-button"
                                 onClick={() => updateBookingStatus(booking.id, "approved")}
