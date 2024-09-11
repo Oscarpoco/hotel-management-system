@@ -5,7 +5,8 @@ import { handleLoader } from "../../redux/actions/UserInterface";
 import { handleCloseNotificationAlert, handleOpenNotificationAlert } from "../../redux/actions/AlertNotification";
 import { useDispatch, useSelector } from "react-redux";
 import { storage } from "../../firebase/Firebase";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore"; // Import Firestore functions
+import {firestore} from '../../firebase/Firebase';
+import { collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore"; // Import Firestore functions
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Storage imports
 import NotificationArlet from "./NotificationArlet";
 
@@ -17,7 +18,7 @@ export default function Gallery() {
     const notification = useSelector((state) => state.notification);
 
     // Initialize Firestore
-    const db = getFirestore(); // This initializes Firestore
+    const db = firestore; 
 
     useEffect(() => {
         fetchImages(); // Fetch images on component mount

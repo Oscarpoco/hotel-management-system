@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import '../styling/Profile.css';
 import { useSelector, useDispatch } from "react-redux";
 import { onProfileOpen, handleOnUpdate, handleLoader } from "../../redux/actions/UserInterface";
-import { getFirestore, doc, getDoc, updateDoc,  } from "firebase/firestore";
+import { doc, getDoc, updateDoc,  } from "firebase/firestore";
+import {firestore} from '../../firebase/Firebase';
 import {storage} from '../../firebase/Firebase';
 import { ref, uploadBytes , getDownloadURL} from "firebase/storage";
 
@@ -19,13 +20,13 @@ export default function Profile() {
     const [profilePicture, setProfilePicture] = useState(null);
     const [profilePictureUrl, setProfilePictureUrl] = useState('');
 
-    const firestore = getFirestore();
+    const db = firestore;
 
     useEffect(() => {
         if (userId) {
             // Fetch user data
             const fetchUserData = async () => {
-                const userDoc = doc(firestore, "admins", userId);
+                const userDoc = doc(db, "admins", userId);
                 const userSnap = await getDoc(userDoc);
                 if (userSnap.exists()) {
                     setUserData(userSnap.data());

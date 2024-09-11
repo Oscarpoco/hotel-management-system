@@ -6,7 +6,7 @@ function Loader(){
 
     return(
         <div className="loader-layout">
-            <span class="loader"></span>
+            <span className="loader"></span>
         </div>
     )
 }

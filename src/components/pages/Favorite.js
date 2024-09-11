@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import '../styling/Accomodation.css';
 import { handleLoader } from "../../redux/actions/UserInterface";
 import { useDispatch } from "react-redux";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import {  collection, getDocs } from "firebase/firestore";
+import {firestore} from '../../firebase/Firebase';
 import { MdFavorite } from "react-icons/md";
 
 export default function Favorite() {
     const [favorites, setFavorites] = useState([]);
     const dispatch = useDispatch();
 
-    const db = getFirestore();
+    const db = firestore;
 
     useEffect(() => {
         fetchFavorites();

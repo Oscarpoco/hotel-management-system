@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import '../styling/Users.css';
-import { collection, getDocs, getFirestore, doc, updateDoc } from "firebase/firestore"; // Import Firestore functions
+import {firestore} from '../../firebase/Firebase';
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore"; // Import Firestore functions
 
 export default function Users() {
     const [users, setUsers] = useState([]);
-    const db = getFirestore();
+    const db = firestore;
 
     // Fetch users from Firestore
     useEffect(() => {

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import '../styling/Accomodation.css';
 import { useSelector, useDispatch } from "react-redux";
 import { handleAddingAccomodation, handleLoader } from "../../redux/actions/UserInterface";
-import { getFirestore, collection, addDoc, doc, getDocs, deleteDoc, updateDoc } from "firebase/firestore"; // Firestore imports
+import { collection, addDoc, doc, getDocs, deleteDoc, updateDoc } from "firebase/firestore"; // Firestore imports
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Firebase Storage imports
 import { storage } from "../../firebase/Firebase"; // Your Firebase storage import
+import {firestore} from '../../firebase/Firebase';
 
 // ICONS
 import { IoMdClose } from "react-icons/io";
@@ -26,7 +27,7 @@ export default function Accomodation() {
 
     const [accommodations, setAccommodations] = useState([]);
 
-    const db = getFirestore();
+    const db = firestore;
 
     useEffect(() => {
         fetchAccommodations();

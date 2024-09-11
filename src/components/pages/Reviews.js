@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../styling/Reviews.css';
-import { getFirestore, collection, query, where, getDocs, updateDoc, doc, getDoc } from "firebase/firestore"; // Import Firestore methods
+import {firestore} from '../../firebase/Firebase';
+import { collection, query, where, getDocs, updateDoc, doc, getDoc } from "firebase/firestore"; // Import Firestore methods
 
 // ICONS
 
@@ -10,7 +11,7 @@ export default function Reviews() {
   const [accommodationsWithReviews, setAccommodationsWithReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const firestore = getFirestore();
+  const db = firestore;
 
   // Fetch accommodations with reviews
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function Reviews() {
       try {
         // Query to fetch accommodations where reviews field exists and is not empty
         const accommodationsQuery = query(
-          collection(firestore, "accommodations"),
+          collection(db, "accommodations"),
           where("reviews", "!=", []) // Fetch accommodations that have reviews
         );
 

@@ -23,7 +23,6 @@ export default function Home(){
 
         setTimeout (() => {
             dispatch(setView(view));
-            window.location.reload();
             dispatch(handleLoader(false));
         }, 2000)
     }

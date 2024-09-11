@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import '../styling/Dashboard.css';
 import { useSelector, useDispatch } from "react-redux";
 // FIRESTORE
-import { getFirestore, doc, getDoc, updateDoc,  } from "firebase/firestore";
+import { doc, getDoc  } from "firebase/firestore";
+import {firestore} from '../../firebase/Firebase';
 // actions
 import { handleSideBar, onProfileOpen, handleLoader } from "../../redux/actions/UserInterface";
 import { setView } from "../../redux/actions/View";
@@ -34,15 +35,15 @@ function Dashboard(){
     const userId = useSelector((state) => state.userInterface.userId);
     const dispatch = useDispatch();
     const [userData, setUserData] = useState(null);
-    const [profilePictureUrl, setProfilePictureUrl] = useState('');
+    const [profilePictureUrl, setProfilePictureUrl] = useState('boy.jpg');
 
-    const firestore = getFirestore();
+    const db = firestore;
 
     useEffect(() => {
         if (userId) {
             // Fetch user data
             const fetchUserData = async () => {
-                const userDoc = doc(firestore, "admins", userId);
+                const userDoc = doc(db, "admins", userId);
                 const userSnap = await getDoc(userDoc);
                 if (userSnap.exists()) {
                     setUserData(userSnap.data());
@@ -51,7 +52,7 @@ function Dashboard(){
             };
             fetchUserData();
         }
-    }, [userId, firestore]);
+    }, [userId, db]);
 
     // LOGOUT
     const handleLogout = () => {
