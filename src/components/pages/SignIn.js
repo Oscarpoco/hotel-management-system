@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import "../styling/SignIn.css";
+import '../styling/SignIn.css'
+import { TextField, Button, Box, Typography, Paper, Container } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSigning, handleLoader } from "../../redux/actions/UserInterface";
 import { handleCloseNotificationAlert, handleOpenNotificationAlert } from "../../redux/actions/AlertNotification";
-import { signInWithEmailAndPassword } from "firebase/auth"; // Import Firebase sign-in method
-import { auth } from "../../firebase/Firebase"; // Import Firebase Auth
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/Firebase";
 import { setUserId } from "../../redux/actions/UserInterface";
 import NotificationArlet from "./NotificationArlet";
 
@@ -12,7 +13,7 @@ function SignIn() {
     const dispatch = useDispatch();
     const notification = useSelector((state) => state.notification);
 
-    const [email, setEmail] = useState(""); 
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     // HANDLE SUBMIT
@@ -20,12 +21,10 @@ function SignIn() {
         e.preventDefault();
         dispatch(handleLoader(true));
 
-        // Use Firebase Authentication to sign in the user
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in successfully
                 const user = userCredential.user;
-                dispatch(setUserId(user.uid)); // Store userId in Redux
+                dispatch(setUserId(user.uid));
 
                 dispatch(handleOpenNotificationAlert('Login successful!'));
                 setTimeout(() => dispatch(handleCloseNotificationAlert()), 3000);
@@ -34,8 +33,6 @@ function SignIn() {
                 dispatch(handleLoader(false));
             })
             .catch((error) => {
-                // Handle Errors here
-                const errorCode = error.code;
                 const errorMessage = error.message;
 
                 dispatch(handleOpenNotificationAlert(`${errorMessage}`));
@@ -46,57 +43,66 @@ function SignIn() {
     };
 
     return (
+
         <div className="signIn-wrapper">
-            {/* LOGO BAR */}
-            <div className="logo-bar">
-                <div className="logo-abbreviation"><h2>RH</h2></div>
-                <h3>
-                    <span>Management System</span>
-                </h3>
-            </div>
+        <Container component="main" maxWidth="xs" style={{ minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <Paper elevation={10} sx={{ padding: 4, mt: 8, borderRadius: 2 }}>
+                {/* LOGO */}
+                <Box display="flex" justifyContent="center" mb={2}>
+                    <Typography variant="h4" component="div" sx={{ fontWeight: "bold", letterSpacing: 2 }}>
+                        RH
+                    </Typography>
+                </Box>
+                <Typography variant="h5" align="center" gutterBottom>
+                    Management System
+                </Typography>
 
-            {/* FORM WRAPPER */}
-            <div className="form-header-wrapper">
-                <div className="form-wrapper">
-                    {/* HEADER */}
-                    <div className="form-header">
-                        <h2>Sign In</h2>
-                    </div>
-                    <form onSubmit={handleSubmit}>
-                        {/* EMAIL */}
-                        <div className="input-wrapper">
-                            <label className="username-label">Email</label>
-                            <input 
-                                type="email" 
-                                placeholder="Enter Email" 
-                                value={email} 
-                                onChange={e => setEmail(e.target.value)} 
-                            />
-                        </div>
+                <form onSubmit={handleSubmit}>
+                    {/* EMAIL */}
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        label="Email Address"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        autoFocus
+                        required
+                    />
 
-                        {/* PASSWORD */}
-                        <div className="input-wrapper">
-                            <label className="password-label">Password</label>
-                            <input 
-                                type="password" 
-                                placeholder="Enter Password" 
-                                value={password} 
-                                onChange={e => setPassword(e.target.value)} 
-                            />
-                        </div> 
+                    {/* PASSWORD */}
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        label="Password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
 
-                        {/* BUTTON */}
-                        <button type="submit">Proceed</button>
-                    </form>
-                </div>
-            </div>
+                    {/* SUBMIT BUTTON */}
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        sx={{ mt: 3, mb: 2, py: 1.5 }}
+                    >
+                        Proceed
+                    </Button>
+                </form>
+            </Paper>
 
             {/* POPUP */}
-            <NotificationArlet 
-            message={notification.message} 
-            onClose={() => dispatch(handleCloseNotificationAlert())} 
-            notificationArletVisible={notification.notificationArletVisible}
+            <NotificationArlet
+                message={notification.message}
+                onClose={() => dispatch(handleCloseNotificationAlert())}
+                notificationArletVisible={notification.notificationArletVisible}
             />
+        </Container>
         </div>
     );
 }

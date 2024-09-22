@@ -3,7 +3,8 @@ import '../styling/Notifications.css';
 import { handleOpenNotifButton, handleLoader } from "../../redux/actions/UserInterface";
 import { useSelector, useDispatch } from "react-redux";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import {firestore} from '../../firebase/Firebase';
+import { firestore } from '../../firebase/Firebase';
+import axios from "axios";
 
 // ICONS
 import { IoIosArrowBack } from "react-icons/io";
@@ -34,6 +35,7 @@ export default function Notifications() {
         e.preventDefault();
 
         try {
+            // Store notification data in Firestore
             await addDoc(collection(db, "notifications"), {
                 from: fromEmail,
                 to: toEmail,
@@ -42,16 +44,32 @@ export default function Notifications() {
                 timestamp: serverTimestamp()
             });
 
-            alert('Notification sent successfully');
-            // Clear the form after sending
+            // Prepare email data
+            const emailData = {
+                from: fromEmail,
+                to: toEmail,
+                subject: subject,
+                message: message
+            };
+            
+            // Send email using Node.js backend
+            const response = await axios.post('http://localhost:5000/send-email', emailData);
+            
+            if (response.data.success) {
+                alert('Notification and email sent successfully');
+            } else {
+                alert('Error sending email');
+            }
+
+            // Clear form fields after sending
             setToEmail("");
             setSubject("");
             setMessage("");
 
-            // close the form
+            // Close form
             handleOpenForm();
         } catch (error) {
-            console.error('Error sending notification:', error);
+            console.error('Error sending notification or email:', error);
         }
     };
 
@@ -62,13 +80,10 @@ export default function Notifications() {
                 <h1>Notifications</h1>
                 <button className="open-form" onClick={handleOpenForm}>Send</button>
             </div>
-            {/* ENDS */}
-
             {/* SENT NOTIFICATIONS */}
             <div className="sent-notifications">
                 {/* Display sent notifications here */}
             </div>
-            {/* ENDS */}
 
             {/* MESSAGE FORM */}
             {sendNotificationButton && (
@@ -81,36 +96,30 @@ export default function Notifications() {
                             <IoMdSend className="send-icon" />
                         </button>
                     </div>
-                    {/* ENDS */}
 
-                    {/* SEND MESSAGE SENDER */}
+                    {/* SENDER INPUT */}
                     <div className="send-message-sender">
                         <label htmlFor="From">From:</label>
-                        <input type="email" placeholder="okpoco15@gmail.com" readOnly value={fromEmail} onChange={(e) => setFromEmail(e.target.value)} />
+                        <input type="email" value={fromEmail} readOnly />
                     </div>
-                    {/* ENDS */}
 
-                    {/* SEND MESSAGE RECEIVER */}
+                    {/* RECEIVER INPUT */}
                     <div className="send-message-receiver">
                         <label htmlFor="To">To:</label>
-                        <input type="email" value={toEmail} onChange={(e) => setToEmail(e.target.value)} />
+                        <input type="email" value={toEmail} onChange={(e) => setToEmail(e.target.value)} required />
                     </div>
-                    {/* ENDS */}
 
-                    {/* SEND MESSAGE SUBJECT */}
+                    {/* SUBJECT INPUT */}
                     <div className="send-message-subject">
-                        <input type="text" placeholder="Subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
+                        <input type="text" placeholder="Subject" value={subject} onChange={(e) => setSubject(e.target.value)} required />
                     </div>
-                    {/* ENDS */}
 
-                    {/* SEND MESSAGE COMPOSE */}
+                    {/* MESSAGE BODY INPUT */}
                     <div className="send-message-compose">
-                        <textarea className="compose-textarea" placeholder="Compose..." value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
+                        <textarea className="compose-textarea" placeholder="Compose..." value={message} onChange={(e) => setMessage(e.target.value)} required></textarea>
                     </div>
-                    {/* ENDS */}
                 </div>
             )}
-            {/* ENDS */}
         </div>
     );
 }

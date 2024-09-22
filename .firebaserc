@@ -1,5 +1,16 @@
 {
   "projects": {
     "default": "hotel-application-79f01"
-  }
+  },
+  "targets": {
+    "hotel-application-79f01": {
+      "hosting": {
+        "cms": [
+          "hotel-application-79f01"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

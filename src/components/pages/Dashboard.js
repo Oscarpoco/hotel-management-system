@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import '../styling/Dashboard.css';
 import { useSelector, useDispatch } from "react-redux";
 // FIRESTORE
-import { doc, getDoc  } from "firebase/firestore";
+// import { doc  } from "firebase/firestore";
 import {firestore} from '../../firebase/Firebase';
+import { doc, onSnapshot } from "firebase/firestore";
 // actions
 import { handleSideBar, onProfileOpen, handleLoader } from "../../redux/actions/UserInterface";
 import { setView } from "../../redux/actions/View";
@@ -21,6 +22,7 @@ import { PiWarehouseFill } from "react-icons/pi";
 import { RiShieldUserFill } from "react-icons/ri";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { MdOutlineFavorite } from "react-icons/md";
+import { FaRegCircleUser } from "react-icons/fa6";
 
 import { toggleSigning } from '../../redux/actions/UserInterface';
 
@@ -35,24 +37,34 @@ function Dashboard(){
     const userId = useSelector((state) => state.userInterface.userId);
     const dispatch = useDispatch();
     const [userData, setUserData] = useState(null);
-    const [profilePictureUrl, setProfilePictureUrl] = useState('boy.jpg');
+    const [profilePictureUrl, setProfilePictureUrl] = useState(null);
 
     const db = firestore;
+ // Real-time Firestore updates
 
-    useEffect(() => {
-        if (userId) {
-            // Fetch user data
-            const fetchUserData = async () => {
-                const userDoc = doc(db, "admins", userId);
-                const userSnap = await getDoc(userDoc);
-                if (userSnap.exists()) {
-                    setUserData(userSnap.data());
-                    setProfilePictureUrl(userSnap.data().profilePictureUrl || ''); 
-                }
-            };
-            fetchUserData();
-        }
-    }, [userId, db]);
+useEffect(() => {
+    if (userId) {
+        // Reference to the Firestore document
+        const userDoc = doc(db, "admins", userId);
+        
+        // Real-time listener for user data, including profile picture updates
+        const unsubscribe = onSnapshot(userDoc, (docSnapshot) => {
+            if (docSnapshot.exists()) {
+                const userData = docSnapshot.data();
+                setUserData(userData);  // Update user data
+                setProfilePictureUrl(userData.profilePictureUrl || '');  // Update profile picture URL
+            } else {
+                console.error("User data not found");
+            }
+        }, (error) => {
+            console.error("Error fetching user data: ", error);
+        });
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+    }
+}, [userId, db]);
+
 
     // LOGOUT
     const handleLogout = () => {
@@ -117,13 +129,13 @@ function Dashboard(){
 
                         {/* NAVIGATION */}
                         <div className="side-bar-navigation">
-                            <button  className="navigation-buttons" onClick={() =>handleChangeView('bookings')}><RiAlignItemBottomFill className="sidebar-icons" style={{color: '#0077B5'}} /> Bookings</button>
-                            <button  className="navigation-buttons" onClick={() =>handleChangeView('reviews')}><MdReviews className="sidebar-icons" style={{color: '#25D366'}} />Reviews</button>
-                            <button  className="navigation-buttons" onClick={() =>handleChangeView('gallery')}><GrGallery className="sidebar-icons" style={{color: '#DD2A7B'}} />Gallery</button>
-                            <button  className="navigation-buttons" onClick={() =>handleChangeView('users')}><RiShieldUserFill className="sidebar-icons" style={{color: '#1DA1F2'}} />Users</button>
-                            <button  className="navigation-buttons" onClick={() =>handleChangeView('accomodation')}><PiWarehouseFill className="sidebar-icons" style={{color: '#1877F2'}} />Accomodation</button>
-                            <button  className="navigation-buttons" onClick={() =>handleChangeView('notifications')}><IoNotificationsSharp className="sidebar-icons" style={{color: '#772222'}} />Notifications</button>
-                            <button  className="navigation-buttons" onClick={() =>handleChangeView('favorite')}><MdOutlineFavorite className="sidebar-icons" style={{color: '#772222'}} />Favorites</button>
+                            <button  className="navigation-buttons" onClick={() =>handleChangeView('bookings')}><RiAlignItemBottomFill className="sidebar-icons" /> Bookings</button>
+                            <button  className="navigation-buttons" onClick={() =>handleChangeView('reviews')}><MdReviews className="sidebar-icons" />Reviews</button>
+                            <button  className="navigation-buttons" onClick={() =>handleChangeView('gallery')}><GrGallery className="sidebar-icons" />Gallery</button>
+                            <button  className="navigation-buttons" onClick={() =>handleChangeView('users')}><RiShieldUserFill className="sidebar-icons" />Users</button>
+                            <button  className="navigation-buttons" onClick={() =>handleChangeView('accomodation')}><PiWarehouseFill className="sidebar-icons"/>Accomodation</button>
+                            <button  className="navigation-buttons" onClick={() =>handleChangeView('notifications')}><IoNotificationsSharp className="sidebar-icons" />Notifications</button>
+                            <button  className="navigation-buttons" onClick={() =>handleChangeView('favorite')}><MdOutlineFavorite className="sidebar-icons" />Favorites</button>
                         </div>
 
                         {/* ENDS */}
@@ -157,7 +169,14 @@ function Dashboard(){
                         {/* ADMIN PROFILE */}
                         <div className="user-profile">
                             <div className="profile" onClick={HnadleOpenProfile}>
-                                <img src={profilePictureUrl} alt="profile-picture"></img>
+                            {profilePictureUrl ? (
+                                    <img
+                                        src={profilePictureUrl}
+                                        alt="Profile"
+                                    />
+                                ) : (
+                                    <FaRegCircleUser style={{ fontSize: "100px" }} /> // Fallback icon
+                            )}
                             </div>
                             <div className="logout">
                                 <RiLogoutCircleRLine className="logout-icon" onClick={handleLogout}/>
