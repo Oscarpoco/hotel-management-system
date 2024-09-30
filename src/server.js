@@ -14,8 +14,8 @@ const transporter = nodemailer.createTransport({
   port: 587,              // SMTP port
   secure: false,          // Use TLS
   auth: {
-    user: 'ac2dc989dfdfe9', // Replace with your Mailtrap username
-    pass: 'fcd862069acae5'   // Replace with your Mailtrap password
+    user: 'ac2dc989dfdfe9', 
+    pass: 'fcd862069acae5'  
   }
 });
 
