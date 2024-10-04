@@ -7,7 +7,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Firebase
 import { storage } from "../../firebase/Firebase"; // Your Firebase storage import
 import {firestore} from '../../firebase/Firebase';
 
-// ICONS
+// MUI Imports
+import { Button, TextField, IconButton, Grid, Box } from '@mui/material';
 import { IoMdClose } from "react-icons/io";
 
 export default function Accomodation() {
@@ -54,8 +55,7 @@ export default function Accomodation() {
             dispatch(handleLoader(true)); 
             const docRef = doc(db, "accommodations", id); 
             await updateDoc(docRef, { availability: status }); 
-            // Refresh accommodations list after update
-            fetchAccommodations();
+            fetchAccommodations(); // Refresh accommodations list after update
         } catch (error) {
             console.error("Error updating availability:", error);
         } finally {
@@ -105,9 +105,7 @@ export default function Accomodation() {
 
             // Save accommodation data to Firestore
             await addDoc(collection(db, "accommodations"), accommodationData);
-
-            // Fetch accommodations again to refresh the list
-            fetchAccommodations();
+            fetchAccommodations(); // Refresh accommodations list after save
 
             // Clear form data
             setFormData({
@@ -150,8 +148,7 @@ export default function Accomodation() {
             dispatch(handleLoader(true));
             const docRef = doc(db, "accommodations", id);
             await deleteDoc(docRef);
-            // Refresh accommodations list after deletion
-            fetchAccommodations();
+            fetchAccommodations(); // Refresh accommodations list after deletion
         } catch (error) {
             console.error("Error deleting accommodation:", error);
         } finally {
@@ -163,12 +160,11 @@ export default function Accomodation() {
         <div className="accomodation-layout">
             {/* ACCOMODATION HEADER */}
             <div className="accomodation-header">
-                <h1>Accomodation</h1>
-                <button className="add-accomodation" onClick={handleOpenAccomdationForm}>
+                <h1>Accommodation</h1>
+                <Button variant="contained" color="primary" onClick={handleOpenAccomdationForm}>
                     Add
-                </button>
+                </Button>
             </div>
-            {/* ENDS */}
 
             {/* ACCOMODATION GRID */}
             <div className="accomodation-grid">
@@ -177,81 +173,122 @@ export default function Accomodation() {
                         <div className="accomodation-grid-item" key={accommodation.id}>
                             {/* PICTURE */}
                             <div className="room-pictures">
-                                <img src={accommodation.images[2]} alt="pictures" className="accomodation-image"/>
+                                <img src={accommodation.images[2]} alt="pictures" className="accomodation-image" />
                             </div>
 
                             {/* CONTENT */}
                             <div className="accomodation-content">
-                                <p><strong>Available:</strong> <br></br>
-                                     {accommodation.availability}
-                                </p>
-
+                                <p><strong>Available:</strong> {accommodation.availability}</p>
                                 <p><strong>{accommodation.price} ZAR</strong> night</p>
                                 <p><strong>{accommodation.location}</strong></p>
-                                <p>
-                                    {accommodation.amenities[0]}--
-                                    {accommodation.amenities[1]}
-                                    <br></br>
-                                    {accommodation.amenities[2]}--
-                                    {accommodation.amenities[3]}
-                                </p>
+                                <p>{accommodation.amenities.join(', ')}</p>
                                 <p>{accommodation.numberOfRooms}</p>
-                                <p>
-                                    <strong>What we offers</strong>
-
-                                    <br></br>
-
-                                    {accommodation.description}
-                                </p>
+                                <p><strong>What we offer:</strong> {accommodation.description}</p>
                             </div>
 
                             {/* DELETE */}
-                            <button className="delete-image" onClick={() => handleDelete(accommodation.id)}><strong>Remove</strong></button>
-                            
-                            {/* Update availability buttons */}
-                            <button className="accommodation-availability-available" onClick={() => updateAvailability(accommodation.id, "available")}><strong>Available</strong></button>
-                            <button className="accommodation-availability-booked" onClick={() => updateAvailability(accommodation.id, "booked")}><strong>Booked</strong></button>
+
+                            <div className='action-buttons-wrapper'>
+                                <Button variant="contained" color="secondary" onClick={() => handleDelete(accommodation.id)}>
+                                    Remove
+                                </Button>
+
+                                {/* Update availability buttons */}
+                                <Button variant="contained" color="success" onClick={() => updateAvailability(accommodation.id, "available")}>
+                                    Available
+                                </Button>
+                                <Button variant="contained" color="warning" onClick={() => updateAvailability(accommodation.id, "booked")}>
+                                    Booked
+                                </Button>
+                            </div>
                         </div>
                     ))}
                 </div>
             </div>
-            {/* ENDS */}
 
             {/* POPUP */}
             {addingAccomodation && (
-                <form className="accomodations-form" onSubmit={handleSubmit}>
-                    {/* LEFT INPUTS */}
-                    <div className="input-wrapper">
-                        <input type="file" accept="image/*" multiple onChange={handleFileChange} />
-                        <input type="number" min={1} name="price" placeholder="Price" value={formData.price} onChange={handleChange} />
-                        <input type="text" name="availability" placeholder="Availability" value={formData.availability} onChange={handleChange} />
-                        <input type="text" name="location" placeholder="Location" value={formData.location} onChange={handleChange} />
-                        <input type="text" name="numberOfRooms" placeholder="Number of rooms" value={formData.numberOfRooms} onChange={handleChange} />
-                        {[...Array(7)].map((_, index) => (
-                            <input
-                                key={index}
-                                type="text"
-                                placeholder={`Amenity ${index + 1}`}
-                                value={formData.amenities[index] || ""}
-                                onChange={(e) => handleAmenitiesChange(index, e.target.value)}
+                <Box className="accomodations-form" component="form" onSubmit={handleSubmit} sx={{ p: 2, backgroundColor: "#f5f5f5", borderRadius: 2 }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <input type="file" accept="image/*" multiple onChange={handleFileChange} />
+                            <TextField
+                                fullWidth
+                                type="number"
+                                label="Price"
+                                name="price"
+                                value={formData.price}
+                                onChange={handleChange}
+                                margin="normal"
                             />
-                        ))}
-                    </div>
+                            <TextField
+                                fullWidth
+                                label="Availability"
+                                name="availability"
+                                value={formData.availability}
+                                onChange={handleChange}
+                                margin="normal"
+                            />
+                            <TextField
+                                fullWidth
+                                label="Location"
+                                name="location"
+                                value={formData.location}
+                                onChange={handleChange}
+                                margin="normal"
+                            />
+                            <TextField
+                                fullWidth
+                                label="Number of rooms"
+                                name="numberOfRooms"
+                                value={formData.numberOfRooms}
+                                onChange={handleChange}
+                                margin="normal"
+                            />
+                            {[...Array(10)].map((_, index) => (
+                                <TextField
+                                    key={index}
+                                    fullWidth
+                                    label={`Amenity ${index + 1}`}
+                                    value={formData.amenities[index] || ""}
+                                    onChange={(e) => handleAmenitiesChange(index, e.target.value)}
+                                    margin="normal"
+                                />
+                            ))}
+                        </Grid>
 
-                    {/* RIGHT INPUTS */}
-                    <div className="input-wrapper">
-                        <input type="text" name="title" placeholder="Title of the room" value={formData.title} onChange={handleChange} />
-                        <textarea name="description" placeholder="Room description and policies" value={formData.description} onChange={handleChange} />
-                    </div>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                fullWidth
+                                label="Title of the room"
+                                name="title"
+                                value={formData.title}
+                                onChange={handleChange}
+                                margin="normal"
+                            />
+                            <TextField
+                                fullWidth
+                                multiline
+                                rows={4}
+                                label="Room description and policies"
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange}
+                                margin="normal"
+                            />
+                        </Grid>
+                    </Grid>
 
                     {/* BUTTONS */}
-                    <div className="action-buttons-wrapper">
-                        <button type="button" className="close-form-button" onClick={handleClose}>
-                            <IoMdClose className="close-detail-form" />
-                        </button>
-                        <button type="submit" className="send-details-button">Submit</button>
-                    </div>
-                </form>
+                    <Box display="flex" justifyContent="space-between" mt={2}>
+                        <IconButton onClick={handleClose}>
+                            <IoMdClose />
+                        </IconButton>
+                        <Button variant="contained" color="primary" type="submit">
+                            Save Accommodation
+                        </Button>
+                    </Box>
+                </Box>
             )}
         </div>
     );
