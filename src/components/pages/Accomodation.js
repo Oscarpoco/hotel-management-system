@@ -208,11 +208,11 @@ export default function Accomodation() {
 
             {/* POPUP */}
             {addingAccomodation && (
-                <Box className="accomodations-form" component="form" onSubmit={handleSubmit} sx={{ p: 2, backgroundColor: "#f5f5f5", borderRadius: 2 }}>
+                <Box className="accomodations-form" component="form" onSubmit={handleSubmit} sx={{ p: 2, borderRadius: 2 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <input type="file" accept="image/*" multiple onChange={handleFileChange} />
-                            <TextField
+                            <TextField className="TextField"
                                 fullWidth
                                 type="number"
                                 label="Price"
@@ -221,7 +221,7 @@ export default function Accomodation() {
                                 onChange={handleChange}
                                 margin="normal"
                             />
-                            <TextField
+                            <TextField className="TextField"
                                 fullWidth
                                 label="Availability"
                                 name="availability"
@@ -229,7 +229,7 @@ export default function Accomodation() {
                                 onChange={handleChange}
                                 margin="normal"
                             />
-                            <TextField
+                            <TextField className="TextField"
                                 fullWidth
                                 label="Location"
                                 name="location"
@@ -237,7 +237,7 @@ export default function Accomodation() {
                                 onChange={handleChange}
                                 margin="normal"
                             />
-                            <TextField
+                            <TextField className="TextField"
                                 fullWidth
                                 label="Number of rooms"
                                 name="numberOfRooms"
@@ -245,8 +245,8 @@ export default function Accomodation() {
                                 onChange={handleChange}
                                 margin="normal"
                             />
-                            {[...Array(10)].map((_, index) => (
-                                <TextField
+                            {[...Array(4)].map((_, index) => (
+                                <TextField className="TextField"
                                     key={index}
                                     fullWidth
                                     label={`Amenity ${index + 1}`}
@@ -258,7 +258,7 @@ export default function Accomodation() {
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
-                            <TextField
+                            <TextField className="TextField"
                                 fullWidth
                                 label="Title of the room"
                                 name="title"
@@ -266,7 +266,7 @@ export default function Accomodation() {
                                 onChange={handleChange}
                                 margin="normal"
                             />
-                            <TextField
+                            <TextField className="TextField"
                                 fullWidth
                                 multiline
                                 rows={4}
@@ -285,7 +285,7 @@ export default function Accomodation() {
                             <IoMdClose />
                         </IconButton>
                         <Button variant="contained" color="primary" type="submit">
-                            Save Accommodation
+                            Save
                         </Button>
                     </Box>
                 </Box>
