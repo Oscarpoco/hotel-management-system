@@ -4,6 +4,10 @@ https://hotel-management-system-iota.vercel.app/
 
 This project is the admin-side application for a hotel management platform. It provides an interface for administrators to manage hotels, monitor bookings, view analytics, and handle user reviews. The application is built using React and leverages various libraries for state management, data visualization, and authentication.
 
+## Credentials
+- Email : Chauke@gmail.com
+- Password : Chauke@2000
+  
 # Getting Started
 This project was bootstrapped with Create React App.
 
