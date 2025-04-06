@@ -17,6 +17,7 @@
     align-items: center;
     padding: 1em;
     box-sizing: border-box;
+    gap: 1.5em;
 }
 
 .gallery-header h1
@@ -79,21 +80,23 @@
     cursor: pointer;
     border: 1px solid rgba(0, 0, 0, .1);
     position: relative;
+    border-radius: 16px;
 }
 
 .delete-image
 {
     border: 1px solid rgba(0, 0, 0, .1);
     padding: .7em 1em;
-    background: rgba(0, 0, 0, .9);
+    background: rgba(236, 5, 5, 0.9);
     color: rgba(255, 255, 255, .9);
     display: flex;
     align-items: center;
     cursor: pointer;
     z-index: 2000;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
+    border-radius: 16px;
 }
 
 .delete-image:hover,
@@ -117,6 +120,55 @@
     object-fit: cover;
 }
 
+.custom-file-input-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .custom-file-input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .custom-file-input label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .custom-file-input label:hover {
+    background-color: #e3e3e3;
+  }
+  
+  .custom-file-input label:active {
+    transform: scale(0.98);
+  }
+  
+  .custom-file-input input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+
+
 @media only screen and (max-width: 740px) {
     
     .gallery-grid
@@ -129,9 +181,14 @@
         font-size: 1.7em;
     }
 
+    .gallery-header button {
+        padding: 0.7rem 1rem;
+        font-size: 0.75rem;
+    }
+
     .gallery-header input
     {
-        width: 32.5%;
+        width: 35%;
         background: rgba(0, 0, 0, .0);
     }
 }

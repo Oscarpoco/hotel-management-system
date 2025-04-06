@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "firebase": "^10.13.1",
+    "framer-motion": "^12.6.3",
     "hotel-management-system": "file:",
     "nodemailer": "^6.9.15",
     "react": "^18.3.1",

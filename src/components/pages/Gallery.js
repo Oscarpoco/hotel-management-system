@@ -5,7 +5,7 @@ import { handleLoader } from "../../redux/actions/UserInterface";
 import { handleCloseNotificationAlert, handleOpenNotificationAlert } from "../../redux/actions/AlertNotification";
 import { useDispatch, useSelector } from "react-redux";
 import { storage } from "../../firebase/Firebase";
-import {firestore} from '../../firebase/Firebase';
+import { firestore } from '../../firebase/Firebase';
 import { collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore"; // Import Firestore functions
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Storage imports
 import NotificationArlet from "./NotificationArlet";
@@ -18,7 +18,7 @@ export default function Gallery() {
     const notification = useSelector((state) => state.notification);
 
     // Initialize Firestore
-    const db = firestore; 
+    const db = firestore;
 
     useEffect(() => {
         fetchImages(); // Fetch images on component mount
@@ -35,14 +35,14 @@ export default function Gallery() {
                 ...doc.data()
             }));
             setImages(imageList);
-            
+
         } catch (error) {
             console.error("Error fetching images: ", error);
         } finally {
             dispatch(handleLoader(false))
         }
     };
-    
+
 
 
     // Handle file selection
@@ -55,7 +55,7 @@ export default function Gallery() {
     // Handle image upload
     const handleUpload = async () => {
 
-        
+
         if (file) {
 
             try {
@@ -68,33 +68,33 @@ export default function Gallery() {
                 // Save the URL to Firestore
                 await addDoc(collection(db, "gallery"), { url: downloadURL });
 
-               
+
                 fetchImages();
                 setFile(null);
                 // dispatch(handleOpenNotificationAlert("Successfully added picture to gallery"));
                 // setTimeout(() => dispatch(handleCloseNotificationAlert()), 3000);
-                
+
             } catch (error) {
                 console.error("Error uploading file: ", error);
-                
-            } 
-            
+
+            }
+
         } else {
-            
+
             dispatch(handleOpenNotificationAlert("Please select a file to upload."));
             setTimeout(() => dispatch(handleCloseNotificationAlert()), 3000);
-            
+
         }
     };
 
 
     // HANDLE DELETE
-    
+
     const handleDelete = async (imageId) => {
         dispatch(handleLoader(true));
         try {
             await deleteDoc(doc(db, "gallery", imageId));
-            fetchImages(); 
+            fetchImages();
             dispatch(handleOpenNotificationAlert("Successfully deleted"));
             setTimeout(() => dispatch(handleCloseNotificationAlert()), 3000);
         } catch (error) {
@@ -104,7 +104,7 @@ export default function Gallery() {
             dispatch(handleLoader(false));
         }
     };
-    
+
 
 
     return (
@@ -112,14 +112,25 @@ export default function Gallery() {
             {/* GALLERY HEADER */}
             <div className="gallery-header">
                 <h1>Gallery</h1>
-                <input type="file" multiple onChange={handleFileChange} /> {/* Input for selecting file */}
-                <button className="add-picture" onClick={handleUpload}>Add</button> {/* Button to upload */}
+                {/* <input type="file" multiple onChange={handleFileChange} />  */}
+                <div className="custom-file-input">
+                    <label htmlFor="fileInput">
+                        Choose Files
+                    </label>
+                    <input
+                        id="fileInput"
+                        type="file"
+                        multiple
+                        onChange={handleFileChange}
+                    />
+                </div>
+                <button className="add-picture" onClick={handleUpload}>ADD</button> {/* Button to upload */}
             </div>
             {/* ENDS */}
 
             {/* GALLERY GRID */}
             <div className="gallery-grid">
-                {images.map((image, index) => ( 
+                {images.map((image, index) => (
                     <div className="gallery-grid-item" key={index}>
                         <img src={image.url} alt={`Gallery ${index}`} />
                         <button className="delete-image" onClick={() => handleDelete(image.id)}><strong>Delete</strong></button>
@@ -129,10 +140,10 @@ export default function Gallery() {
             {/* ENDS */}
 
             {/* NOTIFICATION POPUP */}
-            <NotificationArlet 
-            message={notification.message} 
-            onClose={() => dispatch(handleCloseNotificationAlert())} 
-            notificationArletVisible={notification.notificationArletVisible}
+            <NotificationArlet
+                message={notification.message}
+                onClose={() => dispatch(handleCloseNotificationAlert())}
+                notificationArletVisible={notification.notificationArletVisible}
             />
         </div>
     );

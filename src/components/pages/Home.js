@@ -21,7 +21,7 @@ export default function Home() {
         setTimeout(() => {
             dispatch(setView(view));
             dispatch(handleLoader(false));
-        }, 2000);
+        }, 300);
     };
 
     return (

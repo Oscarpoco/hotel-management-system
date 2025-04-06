@@ -1,5 +1,5 @@
-.accomodation-layout
-{
+/* Modern Accommodation Layout */
+.accomodation-layout {
     width: 100%;
     height: 100%;
     display: flex;
@@ -7,48 +7,51 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #f8fafc;
+    color: #334155;
 }
 
-.accomodation-header
-{
+.accomodation-header {
     width: 100%;
     height: 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1em;
+    padding: 1.5rem;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.accomodation-header h1
-{
+.accomodation-header h1 {
     color: rgba(0, 0, 0, .5);
 }
 
-.accomodation-header button
-{
+.accomodation-header button {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1em 1.5em;
-    border-radius: 10px;
-    background: #1877F2;
-    border: 1px solid #1877F2;
-    box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
-    font-weight: 700;
-    color: whitesmoke;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    background: #3b82f6;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: white;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.accomodation-header button:hover
-{
-    border-radius: 10px;
-    background: #1DA1F2;
-    border: 1px solid #1DA1F2;
-    transition: all .5s ease-in-out;
+.accomodation-header button:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px -1px rgba(59, 130, 246, 0.5);
 }
 
-.accomodation-grid
-{
+.accomodation-grid {
     width: 100%;
     height: 88%;
     display: flex;
@@ -56,56 +59,64 @@
     box-sizing: border-box;
 }
 
-.accomodation-aligning
-{
+.accomodation-aligning {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 1em;
-    gap: 2em;
+    padding: 1.5rem;
+    gap: 1.5rem;
     overflow-y: auto;
     box-sizing: border-box;
 }
 
-.accomodation-grid-item
-{
+.accomodation-grid-item {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1em;
+    gap: 1.5rem;
     width: 100%;
     height: auto;
     cursor: pointer;
-    padding: 1em;
+    padding: 1.5rem;
     box-sizing: border-box;
-    background: #1da0f232;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    border: 2px solid rgba(0, 0, 0, .1);
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(226, 232, 240, 0.8);
     position: relative;
+    transition: all 0.3s ease;
 }
 
-.room-pictures
-{
+.accomodation-grid-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.room-pictures {
     display: flex;
     justify-content: center;
     flex: 1;
     align-items: center;
     cursor: pointer;
     overflow: hidden;
+    border-radius: 0.75rem;
 }
 
-.room-pictures .accomodation-image
-{
+.room-pictures .accomodation-image {
     width: 100%;
     max-height: 500px;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-.accomodation-content
-{
+.room-pictures:hover .accomodation-image {
+    transform: scale(1.05);
+}
+
+.accomodation-content {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -113,175 +124,258 @@
     cursor: pointer;
     flex: 1;
     height: 100%;
-    padding: .7em;
-    gap: .7em;
+    padding: 1rem;
+    gap: 0.75rem;
 }
 
 /* POPUP */
-.accomodations-form
-{
+.accomodations-form {
     position: fixed;
-    width: 95%;
-    height: 95%;
+    width: 90%;
+    height: 90%;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.057);
-    background: rgb(225, 224, 224);
+    border-radius: 1rem;
+    background: white;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    box-shadow: 0 0 10px;
-    gap: 1em;
-    padding: 1em;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    gap: 1.5rem;
+    padding: 2rem;
     z-index: 2000;
     overflow-y: auto;
     box-sizing: border-box;
 }
 
-.accomodations-form .input-wrapper
-{
+.accomodations-form .input-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    gap: 1em;
+    align-items: flex-start;
+    gap: 1.25rem;
     height: 100%;
     width: 45%;
-    /* padding: 1em; */
 }
 
-.accomodations-form input
-{
-    width: 90%;
-    padding: .7em;
+.accomodations-form input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    background: white;
+    color: #1e293b;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
     outline: none;
-    background: rgba(0, 0, 0, .1);
-    color: whitesmoke;
 }
 
-.accomodations-form textarea
-{
+.accomodations-form input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.accomodations-form textarea {
     width: 100%;
     height: 42%;
-    padding: .7em;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    color: #1e293b;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+    resize: vertical;
     outline: none;
-    color: rgba(0, 0, 0, .7);
 }
 
-.action-buttons-wrapper
-{
+.accomodations-form textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.action-buttons-wrapper {
     width: 10%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 1em 0;
+    padding: 1rem 0;
     align-items: flex-start;
-    gap: 1em;
+    gap: 1rem;
     position: relative;
 }
 
-.close-form-button
-{
-    padding: .3em;
-}
-
-.close-detail-form
-{
-    font-size: 1.5em;
-    color: red;
-}
-
-
-.likes
-{
+.close-form-button {
+    padding: 0.5rem;
+    border-radius: 50%;
+    background: #f1f5f9;
     border: none;
-    padding: .7em 1em;
-    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.close-form-button:hover {
+    background: #e2e8f0;
+}
+
+.close-detail-form {
+    font-size: 1.5rem;
+    color: #ef4444;
+}
+
+.likes {
+    border: none;
+    padding: 0.75rem;
+    background: white;
     display: flex;
     align-items: center;
-    cursor: pointer;
-    z-index: 2000;
-    position: absolute;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 1em;
-    top: 0;
-    right: 0;
+    gap: 0.5rem;
+    cursor: pointer;
+    z-index: 100;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
 }
 
-.love-icon
-{
-    font-size: 1.5em;
-    color: #DD2A7B;
+.likes:hover {
+    transform: scale(1.05);
 }
 
-.accommodation-availability-available
-{
-    border: 1px solid rgba(0, 0, 0, .1);
-    padding: .7em 1em;
-    background: #1DA1F2;
+.love-icon {
+    font-size: 1.25rem;
+    color: #ec4899;
+}
+
+.accommodation-availability-available {
+    border: none;
+    padding: 0.5rem 1rem;
+    background: #10b981;
     color: white;
+    font-weight: 500;
+    font-size: 0.875rem;
+    border-radius: 2rem;
     display: flex;
     align-items: center;
     cursor: pointer;
-    z-index: 2000;
+    z-index: 100;
     position: absolute;
-    top: 0;
-    right: 6.5em;
+    top: 1rem;
+    right: 6.5rem;
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+    transition: all 0.2s ease;
 }
 
-.accommodation-availability-booked
-{
-    border: 1px solid rgba(0, 0, 0, .1);
-    padding: .7em 1em;
-    background: #1DA1F2;
+.accommodation-availability-available:hover {
+    background: #059669;
+}
+
+.accommodation-availability-booked {
+    border: none;
+    padding: 0.5rem 1rem;
+    background: #f97316;
     color: white;
+    font-weight: 500;
+    font-size: 0.875rem;
+    border-radius: 2rem;
     display: flex;
     align-items: center;
     cursor: pointer;
-    z-index: 2000;
+    z-index: 100;
     position: absolute;
-    top: 0;
-    right: 13.5em;
+    top: 1rem;
+    right: 13.5rem;
+    box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.3);
+    transition: all 0.2s ease;
 }
 
-@media only screen and (max-width: 740px) {
-    
-    .accomodation-grid-item
-    {
+.accommodation-availability-booked:hover {
+    background: #ea580c;
+}
+
+/* Overlay for the form */
+.form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 1999;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .accomodation-aligning {
+        padding: 1rem;
+    }
+
+    .accomodation-grid-item {
         flex-direction: column;
+        padding: 1rem;
+        height: 100%;
     }
 
-    .accomodation-header
-    {
-        padding: 2em 1em;
-        gap: 1.5em;
+    .accomodation-header {
+        padding: 1rem;
+        gap: 1rem;
+        height: auto;
     }
 
-    .accomodation-header h1
-    {
-        font-size: 1.5em;
+    .accomodation-header h1 {
+        font-size: 1.7rem;
+        color: rgba(0, 0, 0, .5);
     }
 
-    .likes
-    {
-        background: black;
-        color: white;
+    .accomodation-header button {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
     }
 
-    .accomodations-form
-    {
+    .accomodations-form {
         width: 95%;
         height: 95%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        gap: .3em;
-        padding: 1em .5em;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
     }
 
+    .accomodations-form .input-wrapper {
+        width: 100%;
+    }
+
+    .action-buttons-wrapper {
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .likes {
+        background: white;
+    }
+    
+    .accommodation-availability-available,
+    .accommodation-availability-booked {
+        position: static;
+        margin-bottom: 1rem;
+    }
+
+    .room-pictures {
+        width: 100%;
+        height: auto;
+        min-height: 200px; 
+        margin-top: 1rem;
+    }
+    
+    .room-pictures .accomodation-image {
+        width: 100%;
+        height: auto;
+        max-height: 300px; 
+    }
 }

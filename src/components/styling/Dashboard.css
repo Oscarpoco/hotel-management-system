@@ -251,7 +251,6 @@ nav
     align-items: center;
     cursor: pointer;
     border-radius: 50%;
-    padding: .3em;
     border: 2px solid rgba(0, 0, 0, .2);
 }
 
@@ -294,19 +293,20 @@ nav
     
     .aside
     {
-        width: 70%;
+        width: 80%;
         height: 96%;
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
         align-items: center;
-        background: rgba(0, 0, 0, 9);
+        background: rgba(0, 0, 0, .9);
         box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
         position: absolute;
         border-radius: 20px;
         top: 2%;
         left: 2%;
         z-index: 2001;
+        padding: 1em;
     }
 
     .menu-close-icon

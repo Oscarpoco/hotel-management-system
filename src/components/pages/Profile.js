@@ -74,7 +74,7 @@ export default function Profile() {
         setTimeout(() => {
             dispatch(onProfileOpen());
             dispatch(handleLoader(false));
-        }, 3000);
+        }, 300);
     };
 
     // HANDLE ON UPDATE
@@ -83,7 +83,7 @@ export default function Profile() {
         setTimeout(() => {
             dispatch(handleOnUpdate());
             dispatch(handleLoader(false));
-        }, 3000);
+        }, 300);
     };
 
     return (

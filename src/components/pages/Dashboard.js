@@ -1,12 +1,16 @@
 import React from "react";
+
 import { useEffect, useState } from "react";
-import '../styling/Dashboard.css';
 import { useSelector, useDispatch } from "react-redux";
+
+// STYLING
+import '../styling/Dashboard.css';
+
 // FIRESTORE
-// import { doc  } from "firebase/firestore";
 import {firestore} from '../../firebase/Firebase';
 import { doc, onSnapshot } from "firebase/firestore";
-// actions
+
+// ACTIONS
 import { handleSideBar, onProfileOpen, handleLoader } from "../../redux/actions/UserInterface";
 import { setView } from "../../redux/actions/View";
 
@@ -38,9 +42,8 @@ function Dashboard(){
     const dispatch = useDispatch();
     const [userData, setUserData] = useState(null);
     const [profilePictureUrl, setProfilePictureUrl] = useState(null);
-
     const db = firestore;
- // Real-time Firestore updates
+
 
 useEffect(() => {
     if (userId) {
@@ -52,7 +55,7 @@ useEffect(() => {
             if (docSnapshot.exists()) {
                 const userData = docSnapshot.data();
                 setUserData(userData);  // Update user data
-                setProfilePictureUrl(userData.profilePictureUrl || '');  // Update profile picture URL
+                setProfilePictureUrl(userData.profilePictureUrl || '');  
             } else {
                 console.error("User data not found");
             }
@@ -73,7 +76,7 @@ useEffect(() => {
         setTimeout (()=> {
             dispatch(toggleSigning());
             dispatch(handleLoader(false));
-        }, 3000);
+        }, 300);
         
     }
 
@@ -91,7 +94,7 @@ useEffect(() => {
         setTimeout (()=> {
             dispatch(setView(view));
             dispatch(handleLoader(false));
-        }, 3000);
+        }, 300);
     }
     // ENDS
 
@@ -103,7 +106,7 @@ useEffect(() => {
         setTimeout (()=> {
             dispatch(onProfileOpen());
             dispatch(handleLoader(false));
-        }, 3000);
+        }, 500);
     }
 
 
@@ -162,7 +165,7 @@ useEffect(() => {
 
                             <div className="admin-wrapper">
                                 <span><p>Admin</p></span>
-                                <p className="admin">{userData?.name || 'Not available'}</p>
+                                <p className="admin">{userData?.name || 'Admin'}</p>
                             </div>
                         </div>
 
@@ -175,7 +178,7 @@ useEffect(() => {
                                         alt="Profile"
                                     />
                                 ) : (
-                                    <FaRegCircleUser style={{ fontSize: "100px" }} /> // Fallback icon
+                                    <FaRegCircleUser style={{ fontSize: "100px" }} />
                             )}
                             </div>
                             <div className="logout">
