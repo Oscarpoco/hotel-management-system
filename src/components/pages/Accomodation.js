@@ -134,7 +134,7 @@ export default function Accomodation() {
         setTimeout(() => {
             dispatch(handleAddingAccomodation(true));
             dispatch(handleLoader(false));
-        }, 2000);
+        }, 300);
     };
 
     // HANDLE CLOSE
@@ -148,7 +148,7 @@ export default function Accomodation() {
             dispatch(handleLoader(true));
             const docRef = doc(db, "accommodations", id);
             await deleteDoc(docRef);
-            fetchAccommodations(); // Refresh accommodations list after deletion
+            fetchAccommodations(); 
         } catch (error) {
             console.error("Error deleting accommodation:", error);
         } finally {
@@ -178,7 +178,7 @@ export default function Accomodation() {
 
                             {/* CONTENT */}
                             <div className="accomodation-content">
-                                <p><strong>Available:</strong> {accommodation.availability}</p>
+                                <p><strong>Availability:</strong> {accommodation.availability}</p>
                                 <p><strong>{accommodation.price} ZAR</strong> night</p>
                                 <p><strong>{accommodation.location}</strong></p>
                                 <p>{accommodation.amenities.join(', ')}</p>

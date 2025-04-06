@@ -135,7 +135,7 @@ export default function Reviews() {
                     </p>
 
                     <div className="star-box">
-                        <p>{review.rating}</p>
+                        <p id="number">{review.rating}</p>
                         <IoIosStar className="star"/>
                     </div>
                   </div>
